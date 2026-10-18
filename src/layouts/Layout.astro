@@ -1,9 +1,16 @@
 ---
 import "../globals.css";
+
+interface Props {
+  title: string;
+  className?: string;
+}
+
+const { title, className } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="ar" dir="rtl">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -26,9 +33,9 @@ import "../globals.css";
       }
     </style>
 
-    <title>Astro Basics</title>
+    <title>{title ?? "Home"}</title>
   </head>
-  <body>
+  <body class:list={[className]}>
     <slot />
   </body>
 </html>

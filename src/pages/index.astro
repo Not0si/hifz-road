@@ -1,226 +1,305 @@
 ---
+import Layout from "../layouts/Layout.astro";
 import { suwar, ahzab, atman } from "../data/index";
-import "../globals.css";
-// Helper function with fixed typing for indexing
-const formatCursor = (cursor: { surah: number; ayah: number }) => {
-  const surahName = suwar[`${cursor.surah}`]?.ar || `سورة ${cursor.surah}`;
-  return `${surahName} (الآية ${cursor.ayah})`;
-};
+
+// Group Atman by Hizb (Each Hizb contains 8 Atman)
+const hizbGroups = Array.from({ length: 60 }, (_, i) => {
+  const hizbNumber = i + 1;
+  const atmanList = [1, 2, 3, 4, 5, 6, 7, 8]
+    .map((q) => {
+      const atmanId = i * 8 + q;
+      return { id: atmanId, range: atman[`${atmanId}`] };
+    })
+    .filter((item) => item.range);
+
+  return {
+    hizbNumber,
+    hizbRange: ahzab[`${hizbNumber}`],
+    atmanList,
+  };
+});
 ---
 
-<html lang="ar" dir="rtl">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>فهارس القرآن الكريم | Quran Navigator</title>
-    <!-- Importing a clean Arabic font from Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      body {
-        font-family: "Tajawal", sans-serif;
-      }
-      .quran-font {
-        font-family: "Amiri", serif;
-      }
-    </style>
-  </head>
-  <body
-    class="bg-linear-to-br from-slate-900 via-emerald-950 to-slate-900 text-slate-100 min-h-screen py-12 px-4 sm:px-6 lg:px-8"
-  >
-    <main class="max-w-6xl mx-auto space-y-10">
-      <!-- Hero Header -->
-      <header
-        class="text-center space-y-4 py-8 bg-slate-900/60 backdrop-blur-md rounded-3xl border border-emerald-500/20 shadow-2xl"
-      >
-        <div
-          class="inline-flex items-center justify-center p-3 bg-emerald-500/10 rounded-2xl text-emerald-400 mb-2 border border-emerald-500/20"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-8 w-8"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-            ></path>
-          </svg>
-        </div>
-        <h1
-          class="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-linear-to-r from-emerald-300 via-teal-200 to-emerald-400"
-        >
-          فهارس القرآن الكريم
-        </h1>
-        <p class="text-slate-400 text-lg max-w-xl mx-auto">
-          مرجعك المتكامل لاستعراض السور، والأحزاب، والأثمان بدقة وسهولة.
-        </p>
-      </header>
+<Layout
+  className="bg-slate-950 text-slate-100 min-h-screen py-8 px-4 sm:px-6 lg:px-8 font-sans selection:bg-emerald-500 selection:text-white"
+  title="مخطط حفظ الأثمان | Planner Prompt Builder"
+>
+  <main class="max-w-5xl mx-auto space-y-6 py-6">
+    
+    <!-- Hero Header -->
+    <header class="text-center space-y-3 py-8 px-6 rounded-3xl bg-linear-to-b from-emerald-950/40 via-slate-900/60 to-slate-900/40 border border-emerald-500/10 backdrop-blur-xl relative overflow-hidden shadow-2xl">
+      <div class="absolute -top-24 -left-24 w-60 h-60 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-24 -right-24 w-60 h-60 bg-teal-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+        ✨ أداة توليد الموجهات الذكية
+      </span>
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white font-serif">
+        مخطط حفظ الأثمان <span class="text-emerald-400">حسب الأحزاب</span>
+      </h1>
+      <p class="text-slate-400 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
+        اختر الأثمان المطلوبة وحدد المدة الزمنية بالأشهر لتوليد موجه AI مخصص وجاهز للنسخ.
+      </p>
+    </header>
 
-      <!-- Navigation Tabs / Section Selector (Visual Only) -->
-      <div class="flex flex-wrap justify-center gap-3">
-        <a
-          href="#suwar"
-          class="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-medium shadow-lg shadow-emerald-900/30 transition-all"
-          >السور</a
-        >
-        <a
-          href="#ahzab"
-          class="px-6 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 font-medium transition-all"
-          >الأحزاب</a
-        >
-        <a
-          href="#atman"
-          class="px-6 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 font-medium transition-all"
-          >الأثمان</a
-        >
+    <!-- Main Control Panel -->
+    <div class="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 space-y-6 shadow-xl backdrop-blur-md">
+      
+      <!-- Section 1: Duration Selector -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-800/80">
+        <div>
+          <h2 class="text-base font-bold text-slate-100 flex items-center gap-2">
+            <span class="flex items-center justify-center w-6 h-6 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold border border-emerald-500/20">1</span>
+            تحديد الفترة الزمنية
+          </h2>
+          <p class="text-xs text-slate-400 mt-1">حدد عدد الأشهر المخصصة لخطة الحفظ (كل شهر = 4 أسابيع)</p>
+        </div>
+
+        <div class="flex items-center gap-3 bg-slate-950/60 p-1.5 rounded-2xl border border-slate-800">
+          <input
+            type="number"
+            id="months-input"
+            min="1"
+            max="36"
+            value="1"
+            class="w-20 bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2 text-slate-100 focus:outline-none focus:border-emerald-500 font-bold text-center text-base"
+          />
+          <span class="text-xs text-slate-400 font-medium pl-3">أشهر</span>
+        </div>
       </div>
 
-      <!-- Suwar Section -->
-      <section
-        id="suwar"
-        class="bg-slate-900/80 backdrop-blur-md rounded-3xl border border-slate-800 p-6 sm:p-8 space-y-6 shadow-xl"
-      >
-        <div
-          class="flex items-center justify-between border-b border-slate-800 pb-4"
-        >
+      <!-- Section 2: Atman Selection -->
+      <div class="space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h2 class="text-2xl font-bold text-emerald-400">السور المباركة</h2>
-            <p class="text-xs text-slate-400 mt-1">إجمالي 114 سورة قرآنية</p>
+            <h2 class="text-base font-bold text-slate-100 flex items-center gap-2">
+              <span class="flex items-center justify-center w-6 h-6 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold border border-emerald-500/20">2</span>
+              اختيار الأثمان والأحزاب
+            </h2>
+            <p class="text-xs text-slate-400 mt-0.5">انقر على الأثمان الفردية أو حدد الحزب بالكامل</p>
           </div>
-          <span
-            class="px-3 py-1 bg-emerald-500/10 text-emerald-400 text-xs font-semibold rounded-full border border-emerald-500/20"
-            >Suwar</span
-          >
+          
+          <div class="flex items-center gap-2">
+            <button
+              type="button"
+              id="select-all"
+              class="px-3 py-1.5 text-xs font-medium bg-slate-800 hover:bg-slate-700/80 text-slate-300 border border-slate-700 rounded-xl transition-all cursor-pointer"
+            >
+              تحديد الكل
+            </button>
+            <button
+              type="button"
+              id="deselect-all"
+              class="px-3 py-1.5 text-xs font-medium bg-slate-800 hover:bg-slate-700/80 text-slate-400 border border-slate-700 rounded-xl transition-all cursor-pointer hover:text-slate-200"
+            >
+              إلغاء التحديد
+            </button>
+          </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Hizb Groups Grid -->
+        <div class="space-y-3 max-h-130 overflow-y-auto pr-1 pl-1 scrollbar-thin scrollbar-thumb-slate-800">
           {
-            Object.entries(suwar).map(([number, surah]) => (
-              <div class="group flex items-center justify-between p-4 rounded-2xl bg-slate-800/50 border border-slate-800 hover:border-emerald-500/40 hover:bg-slate-800 transition-all">
-                <div class="flex items-center gap-4">
-                  <span class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 font-bold flex items-center justify-center border border-emerald-500/20 group-hover:bg-emerald-500 group-hover:text-slate-950 transition-colors">
-                    {number}
-                  </span>
-                  <div>
-                    <h3 class="quran-font font-bold text-slate-100 text-xl">
-                      {surah.ar}
-                    </h3>
-                    <span class="text-xs text-slate-400 tracking-wide">
-                      {surah.en}
+            hizbGroups.map((hizb) => (
+              <details class="group bg-slate-950/40 border border-slate-800/80 rounded-2xl overflow-hidden transition-all duration-200 [[open]]:bg-slate-950/80 [[open]]:border-emerald-500/30">
+                <summary class="flex items-center justify-between px-4 py-3 cursor-pointer select-none list-none hover:bg-slate-900/50 transition-colors">
+                  <div class="flex items-center gap-3">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 group-open:scale-125 transition-transform"></span>
+                    <span class="font-bold text-sm text-slate-200">
+                      الحزب رقم {hizb.hizbNumber}
+                    </span>
+                    <span class="text-xs text-slate-500 font-medium">
+                      (8 أثمان)
                     </span>
                   </div>
+
+                  <div class="flex items-center gap-3">
+                    <button
+                      type="button"
+                      class="select-hizb-btn text-xs font-medium bg-emerald-500/10 text-emerald-400 px-3 py-1 rounded-lg border border-emerald-500/20 hover:bg-emerald-500/20 transition-all cursor-pointer"
+                      data-hizb={hizb.hizbNumber}
+                    >
+                      تحديد الحزب كامل
+                    </button>
+                    
+                    <!-- Chevron icon -->
+                    <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                </summary>
+
+                <div class="p-4 border-t border-slate-800/50 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 bg-slate-900/30">
+                  {hizb.atmanList.map((atmanItem) => {
+                    const startSurah =
+                      suwar[`${atmanItem.range.start.surah}`]?.ar ||
+                      `سورة ${atmanItem.range.start.surah}`;
+                    const endSurah =
+                      suwar[`${atmanItem.range.end.surah}`]?.ar ||
+                      `سورة ${atmanItem.range.end.surah}`;
+                    return (
+                      <label class="relative flex items-start gap-3 p-3 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/40 cursor-pointer transition-all has-checked:bg-emerald-950/20 has-checked:border-emerald-500/50 group/item select-none">
+                        <input
+                          type="checkbox"
+                          name="atman-checkbox"
+                          value={atmanItem.id}
+                          data-hizb={hizb.hizbNumber}
+                          class="mt-1 w-4 h-4 rounded border-slate-700 bg-slate-950 text-emerald-500 focus:ring-emerald-500 focus:ring-offset-slate-900 transition-all cursor-pointer"
+                        />
+                        <div class="space-y-1 text-xs">
+                          <div class="font-bold text-slate-200 group-has-checked/item:text-emerald-300">
+                            الثمن {atmanItem.id}
+                          </div>
+                          <div class="text-slate-400 text-[11px] leading-tight">
+                            من: <span class="text-slate-300 font-medium">{startSurah} ({atmanItem.range.start.ayah})</span>
+                          </div>
+                          <div class="text-slate-400 text-[11px] leading-tight">
+                            إلى: <span class="text-slate-300 font-medium">{endSurah} ({atmanItem.range.end.ayah})</span>
+                          </div>
+                        </div>
+                      </label>
+                    );
+                  })}
                 </div>
-              </div>
+              </details>
             ))
           }
         </div>
-      </section>
+      </div>
 
-      <!-- Ahzab Section -->
-      <section
-        id="ahzab"
-        class="bg-slate-900/80 backdrop-blur-md rounded-3xl border border-slate-800 p-6 sm:p-8 space-y-6 shadow-xl"
-      >
-        <div
-          class="flex items-center justify-between border-b border-slate-800 pb-4"
+      <!-- Copy Action CTA -->
+      <div class="pt-4 border-t border-slate-800 space-y-3">
+        <button
+          type="button"
+          id="copy-prompt-btn"
+          class="w-full py-4 rounded-2xl bg-linear-to-r from-emerald-600 via-teal-600 to-emerald-600 hover:opacity-95 text-white font-bold text-base shadow-lg shadow-emerald-950/50 transition-all cursor-pointer flex items-center justify-center gap-2 group active:scale-[0.99]"
         >
-          <div>
-            <h2 class="text-2xl font-bold text-teal-400">الأحزاب القرآنية</h2>
-            <p class="text-xs text-slate-400 mt-1">تقسيم القرآن إلى 60 حزباً</p>
-          </div>
-          <span
-            class="px-3 py-1 bg-teal-500/10 text-teal-400 text-xs font-semibold rounded-full border border-teal-500/20"
-            >Ahzab</span
-          >
-        </div>
+          <svg class="w-5 h-5 text-emerald-200 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          <span>نسخ موجه الذكاء الاصطناعي (AI Prompt)</span>
+        </button>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {
-            Object.entries(ahzab).map(([number, range]) => (
-              <div class="p-5 rounded-2xl bg-slate-800/50 border border-slate-800 hover:border-teal-500/40 transition-all space-y-3">
-                <div class="flex items-center justify-between">
-                  <span class="text-xs font-bold bg-teal-500/10 text-teal-300 px-3 py-1 rounded-lg border border-teal-500/20">
-                    الحزب {number}
-                  </span>
-                </div>
-                <div class="text-xs text-slate-300 space-y-2 bg-slate-900/50 p-3 rounded-xl border border-slate-800">
-                  <div class="flex justify-between items-center">
-                    <span class="text-slate-400 font-medium">البداية:</span>
-                    <span class="font-semibold text-emerald-300">
-                      {formatCursor(range.start)}
-                    </span>
-                  </div>
-                  <div class="flex justify-between items-center">
-                    <span class="text-slate-400 font-medium">النهاية:</span>
-                    <span class="font-semibold text-emerald-300">
-                      {formatCursor(range.end)}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ))
-          }
-        </div>
-      </section>
-
-      <!-- Atman Section -->
-      <!-- Atman Section -->
-      <section
-        id="atman"
-        class="bg-slate-900/80 backdrop-blur-md rounded-3xl border border-slate-800 p-6 sm:p-8 space-y-6 shadow-xl"
-      >
         <div
-          class="flex items-center justify-between border-b border-slate-800 pb-4"
+          id="toast"
+          class="hidden p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-center text-xs sm:text-sm font-medium animate-fade-in"
         >
-          <div>
-            <h2 class="text-2xl font-bold text-amber-400">الأثمان (Atman)</h2>
-            <p class="text-xs text-slate-400 mt-1">
-              تقسيم الأحزاب إلى أثمان (كل ثمن = نصف ربع)
-            </p>
-          </div>
-          <span
-            class="px-3 py-1 bg-amber-500/10 text-amber-400 text-xs font-semibold rounded-full border border-amber-500/20"
-            >Thumn / Atman</span
-          >
+          ✅ تم نسخ الموجه بنجاح إلى الحافظة!
         </div>
+      </div>
+    </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {
-            Object.entries(atman).map(([number, range]) => (
-              <div class="p-4 rounded-2xl bg-slate-800/50 border border-slate-800 hover:border-amber-500/40 transition-all space-y-2.5">
-                <div class="flex items-center justify-between">
-                  <span class="text-xs font-bold bg-amber-500/10 text-amber-300 px-2.5 py-1 rounded-lg border border-amber-500/20">
-                    الثمن {number}
-                  </span>
-                </div>
-                <div class="text-xs text-slate-300 space-y-1.5 bg-slate-900/50 p-2.5 rounded-xl border border-slate-800">
-                  <div class="flex justify-between items-center">
-                    <span class="text-slate-400 font-medium">من:</span>
-                    <span class="font-medium text-amber-200">
-                      {formatCursor(range.start)}
-                    </span>
-                  </div>
-                  <div class="flex justify-between items-center">
-                    <span class="text-slate-400 font-medium">إلى:</span>
-                    <span class="font-medium text-amber-200">
-                      {formatCursor(range.end)}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ))
-          }
-        </div>
-      </section>
-    </main>
-  </body>
-</html>
+    <!-- Output Preview Box -->
+    <section class="bg-slate-900/50 border border-slate-800 rounded-3xl p-5 space-y-3">
+      <div class="flex items-center justify-between">
+        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">
+          معاينة نص الموجه
+        </h3>
+        <span class="text-[11px] text-slate-500 font-mono">Auto-generated</span>
+      </div>
+      <textarea
+        id="prompt-preview"
+        rows="5"
+        readonly
+        class="w-full bg-slate-950/80 border border-slate-800/80 rounded-2xl p-4 text-xs text-slate-300 focus:outline-none resize-none font-mono leading-relaxed"
+        placeholder="اختر الأثمان والمدة لتظهر المعاينة هنا..."></textarea>
+    </section>
+
+  </main>
+
+  <script define:vars={{ atmanData: atman, suwarData: suwar }}>
+    const selectAllBtn = document.getElementById("select-all");
+    const deselectAllBtn = document.getElementById("deselect-all");
+    const checkboxes = document.querySelectorAll('input[name="atman-checkbox"]');
+    const hizbSelectButtons = document.querySelectorAll(".select-hizb-btn");
+    const copyPromptBtn = document.getElementById("copy-prompt-btn");
+    const monthsInput = document.getElementById("months-input");
+    const promptPreview = document.getElementById("prompt-preview");
+    const toast = document.getElementById("toast");
+
+    selectAllBtn.addEventListener("click", () => {
+      checkboxes.forEach((cb) => (cb.checked = true));
+      updatePreview();
+    });
+
+    deselectAllBtn.addEventListener("click", () => {
+      checkboxes.forEach((cb) => (cb.checked = false));
+      updatePreview();
+    });
+
+    hizbSelectButtons.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault(); // Prevent closing/opening accordion on button click
+        const hizbNum = btn.getAttribute("data-hizb");
+        const hizbCheckboxes = document.querySelectorAll(
+          `input[name="atman-checkbox"][data-hizb="${hizbNum}"]`
+        );
+        const allChecked = Array.from(hizbCheckboxes).every((cb) => cb.checked);
+        hizbCheckboxes.forEach((cb) => (cb.checked = !allChecked));
+        updatePreview();
+      });
+    });
+
+    checkboxes.forEach((cb) => cb.addEventListener("change", updatePreview));
+    monthsInput.addEventListener("input", updatePreview);
+
+    function buildPromptText() {
+      const selectedIds = Array.from(checkboxes)
+        .filter((cb) => cb.checked)
+        .map((cb) => Number(cb.value))
+        .sort((a, b) => a - b);
+
+      const months = Math.max(1, parseInt(monthsInput.value, 10) || 1);
+
+      if (selectedIds.length === 0) {
+        return "الرجاء اختيار ثمن واحد على الأقل وتحديد الفترة لتوليد الموجه.";
+      }
+
+      let selectedDetails = selectedIds
+        .map((id) => {
+          const range = atmanData[id];
+          const startSurah =
+            suwarData[range.start.surah]?.ar || `سورة ${range.start.surah}`;
+          const endSurah =
+            suwarData[range.end.surah]?.ar || `سورة ${range.end.surah}`;
+          const hizbNum = Math.ceil(id / 8);
+          return `الثمن ${id} (الحزب ${hizbNum}): من ${startSurah} (آية ${range.start.ayah}) إلى ${endSurah} (آية ${range.end.ayah})`;
+        })
+        .join("\n");
+
+      return `أريدك أن تكتب لي كود ملف HTML واحد (Single HTML file) متكامل مع تنسيقات Tailwind CSS وجماليات بصرية عالية (Dark mode عصري، تصميم نظيف، خطوط عربية أميري وتاجوال) يعمل كـ "مخطط تفاعلي متقدم لحفظ الأثمان القرآنية برواية نافع المدني".
+
+معلومات الخطة:
+- المدة الزمنية: ${months} أشهر (بواقع 4 أسابيع لكل شهر، إجمالي ${months * 4} أسبوعاً).
+- الأثمان المفصلة المطلوب جدولتها وتوزيعها بالتساوي على الأسابيع:
+${selectedDetails}
+
+المطلوب تنفيذه في ملف الـ HTML:
+1. واجهة مستخدم احترافية باللغة العربية (RTL) مع بطاقات أسبوعية منظمة.
+2. عرض تفاصيل كل ثمن بوضوح داخل جدول الأسبوع (اسم السورة، رقم الحزب، ورقم الآيات البداية والنهاية).
+3. إمكانية تفاعل المستخدم (مثل تحديد إنجاز الأسبوع وتخزين الحالة محلياً عبر LocalStorage).
+4. تسليم الكود البرمجي كاملاً ونظيفاً ضمن صندوق أكواد واحد فقط جاهز للتشغيل.`;
+    }
+
+    function updatePreview() {
+      promptPreview.value = buildPromptText();
+    }
+
+    copyPromptBtn.addEventListener("click", () => {
+      const textToCopy = buildPromptText();
+      if (textToCopy.startsWith("الرجاء")) {
+        alert("الرجاء اختيار ثمن واحد على الأقل أولاً.");
+        return;
+      }
+
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        toast.classList.remove("hidden");
+        setTimeout(() => {
+          toast.classList.add("hidden");
+        }, 4000);
+      });
+    });
+
+    updatePreview();
+  </script>
+</Layout>
