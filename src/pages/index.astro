@@ -25,46 +25,90 @@ const hizbGroups = Array.from({ length: 60 }, (_, i) => {
   title="مخطط حفظ الأثمان | Planner Prompt Builder"
 >
   <main class="max-w-5xl mx-auto space-y-6 py-6">
-    
     <!-- Hero Header -->
-    <header class="text-center space-y-3 py-8 px-6 rounded-3xl bg-linear-to-b from-emerald-950/40 via-slate-900/60 to-slate-900/40 border border-emerald-500/10 backdrop-blur-xl relative overflow-hidden shadow-2xl">
-      <div class="absolute -top-24 -left-24 w-60 h-60 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
-      <div class="absolute -bottom-24 -right-24 w-60 h-60 bg-teal-500/10 rounded-full blur-3xl pointer-events-none"></div>
-      
-      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+    <header
+      class="text-center space-y-3 py-8 px-6 rounded-3xl bg-gradient-to-b from-emerald-950/40 via-slate-900/60 to-slate-900/40 border border-emerald-500/10 backdrop-blur-xl relative overflow-hidden shadow-2xl"
+    >
+      <div
+        class="absolute -top-24 -left-24 w-60 h-60 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"
+      >
+      </div>
+      <div
+        class="absolute -bottom-24 -right-24 w-60 h-60 bg-teal-500/10 rounded-full blur-3xl pointer-events-none"
+      >
+      </div>
+
+      <span
+        class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+      >
         ✨ أداة توليد الموجهات الذكية
       </span>
-      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white font-serif">
+      <h1
+        class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white font-serif"
+      >
         مخطط حفظ الأثمان <span class="text-emerald-400">حسب الأحزاب</span>
       </h1>
-      <p class="text-slate-400 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
-        اختر الأثمان المطلوبة وحدد المدة الزمنية بالأشهر لتوليد موجه AI مخصص وجاهز للنسخ.
+      <p
+        class="text-slate-400 text-sm sm:text-base max-w-lg mx-auto leading-relaxed"
+      >
+        اختر الأثمان المطلوبة وحدد تاريخ البداية والنهاية لتوليد موجه AI مخصص
+        وجاهز للنسخ.
       </p>
     </header>
 
     <!-- Main Control Panel -->
-    <div class="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 space-y-6 shadow-xl backdrop-blur-md">
-      
-      <!-- Section 1: Duration Selector -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-800/80">
+    <div
+      class="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 space-y-6 shadow-xl backdrop-blur-md"
+    >
+      <!-- Section 1: Date Range Selector -->
+      <div
+        class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-slate-800/80"
+      >
         <div>
-          <h2 class="text-base font-bold text-slate-100 flex items-center gap-2">
-            <span class="flex items-center justify-center w-6 h-6 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold border border-emerald-500/20">1</span>
-            تحديد الفترة الزمنية
+          <h2
+            class="text-base font-bold text-slate-100 flex items-center gap-2"
+          >
+            <span
+              class="flex items-center justify-center w-6 h-6 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold border border-emerald-500/20"
+              >1</span
+            >
+            تحديد الفترة الزمنية (تاريخ البداية والنهاية)
           </h2>
-          <p class="text-xs text-slate-400 mt-1">حدد عدد الأشهر المخصصة لخطة الحفظ (كل شهر = 4 أسابيع)</p>
+          <p class="text-xs text-slate-400 mt-1">
+            حدد تاريخ بدء الخطة وانتهائها ليتم احتساب الأسابيع تلقائياً
+          </p>
         </div>
 
-        <div class="flex items-center gap-3 bg-slate-950/60 p-1.5 rounded-2xl border border-slate-800">
-          <input
-            type="number"
-            id="months-input"
-            min="1"
-            max="36"
-            value="1"
-            class="w-20 bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2 text-slate-100 focus:outline-none focus:border-emerald-500 font-bold text-center text-base"
-          />
-          <span class="text-xs text-slate-400 font-medium pl-3">أشهر</span>
+        <div class="flex flex-wrap items-center gap-3">
+          <!-- Start Date -->
+          <div
+            class="flex items-center gap-2 bg-slate-950/60 px-3 py-2 rounded-2xl border border-slate-800"
+          >
+            <label
+              for="start-date-input"
+              class="text-xs text-slate-400 font-medium">من:</label
+            >
+            <input
+              type="date"
+              id="start-date-input"
+              class="bg-slate-900 border border-slate-700/80 rounded-xl px-2.5 py-1.5 text-slate-100 text-xs font-medium focus:outline-none focus:border-emerald-500 cursor-pointer"
+            />
+          </div>
+
+          <!-- End Date -->
+          <div
+            class="flex items-center gap-2 bg-slate-950/60 px-3 py-2 rounded-2xl border border-slate-800"
+          >
+            <label
+              for="end-date-input"
+              class="text-xs text-slate-400 font-medium">إلى:</label
+            >
+            <input
+              type="date"
+              id="end-date-input"
+              class="bg-slate-900 border border-slate-700/80 rounded-xl px-2.5 py-1.5 text-slate-100 text-xs font-medium focus:outline-none focus:border-emerald-500 cursor-pointer"
+            />
+          </div>
         </div>
       </div>
 
@@ -72,13 +116,20 @@ const hizbGroups = Array.from({ length: 60 }, (_, i) => {
       <div class="space-y-4">
         <div class="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h2 class="text-base font-bold text-slate-100 flex items-center gap-2">
-              <span class="flex items-center justify-center w-6 h-6 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold border border-emerald-500/20">2</span>
+            <h2
+              class="text-base font-bold text-slate-100 flex items-center gap-2"
+            >
+              <span
+                class="flex items-center justify-center w-6 h-6 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold border border-emerald-500/20"
+                >2</span
+              >
               اختيار الأثمان والأحزاب
             </h2>
-            <p class="text-xs text-slate-400 mt-0.5">انقر على الأثمان الفردية أو حدد الحزب بالكامل</p>
+            <p class="text-xs text-slate-400 mt-0.5">
+              انقر على الأثمان الفردية أو حدد الحزب بالكامل
+            </p>
           </div>
-          
+
           <div class="flex items-center gap-2">
             <button
               type="button"
@@ -98,13 +149,15 @@ const hizbGroups = Array.from({ length: 60 }, (_, i) => {
         </div>
 
         <!-- Hizb Groups Grid -->
-        <div class="space-y-3 max-h-130 overflow-y-auto pr-1 pl-1 scrollbar-thin scrollbar-thumb-slate-800">
+        <div
+          class="space-y-3 max-h-[520px] overflow-y-auto pr-1 pl-1 scrollbar-thin scrollbar-thumb-slate-800"
+        >
           {
             hizbGroups.map((hizb) => (
-              <details class="group bg-slate-950/40 border border-slate-800/80 rounded-2xl overflow-hidden transition-all duration-200 [[open]]:bg-slate-950/80 [[open]]:border-emerald-500/30">
+              <details class="group bg-slate-950/40 border border-slate-800/80 rounded-2xl overflow-hidden transition-all duration-200 [&[open]]:bg-slate-950/80 [&[open]]:border-emerald-500/30">
                 <summary class="flex items-center justify-between px-4 py-3 cursor-pointer select-none list-none hover:bg-slate-900/50 transition-colors">
                   <div class="flex items-center gap-3">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500 group-open:scale-125 transition-transform"></span>
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 group-open:scale-125 transition-transform" />
                     <span class="font-bold text-sm text-slate-200">
                       الحزب رقم {hizb.hizbNumber}
                     </span>
@@ -121,10 +174,19 @@ const hizbGroups = Array.from({ length: 60 }, (_, i) => {
                     >
                       تحديد الحزب كامل
                     </button>
-                    
-                    <!-- Chevron icon -->
-                    <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+
+                    <svg
+                      class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 9l-7 7-7-7"
+                      />
                     </svg>
                   </div>
                 </summary>
@@ -138,7 +200,7 @@ const hizbGroups = Array.from({ length: 60 }, (_, i) => {
                       suwar[`${atmanItem.range.end.surah}`]?.ar ||
                       `سورة ${atmanItem.range.end.surah}`;
                     return (
-                      <label class="relative flex items-start gap-3 p-3 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/40 cursor-pointer transition-all has-checked:bg-emerald-950/20 has-checked:border-emerald-500/50 group/item select-none">
+                      <label class="relative flex items-start gap-3 p-3 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/40 cursor-pointer transition-all has-[:checked]:bg-emerald-950/20 has-[:checked]:border-emerald-500/50 group/item select-none">
                         <input
                           type="checkbox"
                           name="atman-checkbox"
@@ -147,14 +209,20 @@ const hizbGroups = Array.from({ length: 60 }, (_, i) => {
                           class="mt-1 w-4 h-4 rounded border-slate-700 bg-slate-950 text-emerald-500 focus:ring-emerald-500 focus:ring-offset-slate-900 transition-all cursor-pointer"
                         />
                         <div class="space-y-1 text-xs">
-                          <div class="font-bold text-slate-200 group-has-checked/item:text-emerald-300">
+                          <div class="font-bold text-slate-200 group-has-[:checked]/item:text-emerald-300">
                             الثمن {atmanItem.id}
                           </div>
                           <div class="text-slate-400 text-[11px] leading-tight">
-                            من: <span class="text-slate-300 font-medium">{startSurah} ({atmanItem.range.start.ayah})</span>
+                            من:{" "}
+                            <span class="text-slate-300 font-medium">
+                              {startSurah} ({atmanItem.range.start.ayah})
+                            </span>
                           </div>
                           <div class="text-slate-400 text-[11px] leading-tight">
-                            إلى: <span class="text-slate-300 font-medium">{endSurah} ({atmanItem.range.end.ayah})</span>
+                            إلى:{" "}
+                            <span class="text-slate-300 font-medium">
+                              {endSurah} ({atmanItem.range.end.ayah})
+                            </span>
                           </div>
                         </div>
                       </label>
@@ -172,10 +240,20 @@ const hizbGroups = Array.from({ length: 60 }, (_, i) => {
         <button
           type="button"
           id="copy-prompt-btn"
-          class="w-full py-4 rounded-2xl bg-linear-to-r from-emerald-600 via-teal-600 to-emerald-600 hover:opacity-95 text-white font-bold text-base shadow-lg shadow-emerald-950/50 transition-all cursor-pointer flex items-center justify-center gap-2 group active:scale-[0.99]"
+          class="w-full py-4 rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600 hover:opacity-95 text-white font-bold text-base shadow-lg shadow-emerald-950/50 transition-all cursor-pointer flex items-center justify-center gap-2 group active:scale-[0.99]"
         >
-          <svg class="w-5 h-5 text-emerald-200 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          <svg
+            class="w-5 h-5 text-emerald-200 group-hover:scale-110 transition-transform"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+            ></path>
           </svg>
           <span>نسخ موجه الذكاء الاصطناعي (AI Prompt)</span>
         </button>
@@ -190,7 +268,9 @@ const hizbGroups = Array.from({ length: 60 }, (_, i) => {
     </div>
 
     <!-- Output Preview Box -->
-    <section class="bg-slate-900/50 border border-slate-800 rounded-3xl p-5 space-y-3">
+    <section
+      class="bg-slate-900/50 border border-slate-800 rounded-3xl p-5 space-y-3"
+    >
       <div class="flex items-center justify-between">
         <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">
           معاينة نص الموجه
@@ -199,23 +279,33 @@ const hizbGroups = Array.from({ length: 60 }, (_, i) => {
       </div>
       <textarea
         id="prompt-preview"
-        rows="5"
+        rows="6"
         readonly
         class="w-full bg-slate-950/80 border border-slate-800/80 rounded-2xl p-4 text-xs text-slate-300 focus:outline-none resize-none font-mono leading-relaxed"
-        placeholder="اختر الأثمان والمدة لتظهر المعاينة هنا..."></textarea>
+        placeholder="اختر الأثمان والتواريخ لتظهر المعاينة هنا..."></textarea>
     </section>
-
   </main>
 
   <script define:vars={{ atmanData: atman, suwarData: suwar }}>
     const selectAllBtn = document.getElementById("select-all");
     const deselectAllBtn = document.getElementById("deselect-all");
-    const checkboxes = document.querySelectorAll('input[name="atman-checkbox"]');
+    const checkboxes = document.querySelectorAll(
+      'input[name="atman-checkbox"]',
+    );
     const hizbSelectButtons = document.querySelectorAll(".select-hizb-btn");
     const copyPromptBtn = document.getElementById("copy-prompt-btn");
-    const monthsInput = document.getElementById("months-input");
+    const startDateInput = document.getElementById("start-date-input");
+    const endDateInput = document.getElementById("end-date-input");
     const promptPreview = document.getElementById("prompt-preview");
     const toast = document.getElementById("toast");
+
+    // Initialize Default Dates (Today -> +1 Month)
+    const today = new Date();
+    const nextMonth = new Date();
+    nextMonth.setMonth(today.getMonth() + 1);
+
+    startDateInput.value = today.toISOString().split("T")[0];
+    endDateInput.value = nextMonth.toISOString().split("T")[0];
 
     selectAllBtn.addEventListener("click", () => {
       checkboxes.forEach((cb) => (cb.checked = true));
@@ -229,10 +319,10 @@ const hizbGroups = Array.from({ length: 60 }, (_, i) => {
 
     hizbSelectButtons.forEach((btn) => {
       btn.addEventListener("click", (e) => {
-        e.preventDefault(); // Prevent closing/opening accordion on button click
+        e.preventDefault();
         const hizbNum = btn.getAttribute("data-hizb");
         const hizbCheckboxes = document.querySelectorAll(
-          `input[name="atman-checkbox"][data-hizb="${hizbNum}"]`
+          `input[name="atman-checkbox"][data-hizb="${hizbNum}"]`,
         );
         const allChecked = Array.from(hizbCheckboxes).every((cb) => cb.checked);
         hizbCheckboxes.forEach((cb) => (cb.checked = !allChecked));
@@ -241,7 +331,8 @@ const hizbGroups = Array.from({ length: 60 }, (_, i) => {
     });
 
     checkboxes.forEach((cb) => cb.addEventListener("change", updatePreview));
-    monthsInput.addEventListener("input", updatePreview);
+    startDateInput.addEventListener("change", updatePreview);
+    endDateInput.addEventListener("change", updatePreview);
 
     function buildPromptText() {
       const selectedIds = Array.from(checkboxes)
@@ -249,11 +340,28 @@ const hizbGroups = Array.from({ length: 60 }, (_, i) => {
         .map((cb) => Number(cb.value))
         .sort((a, b) => a - b);
 
-      const months = Math.max(1, parseInt(monthsInput.value, 10) || 1);
-
       if (selectedIds.length === 0) {
-        return "الرجاء اختيار ثمن واحد على الأقل وتحديد الفترة لتوليد الموجه.";
+        return "الرجاء اختيار ثمن واحد على الأقل لتوليد الموجه.";
       }
+
+      const startDateVal = startDateInput.value;
+      const endDateVal = endDateInput.value;
+
+      if (!startDateVal || !endDateVal) {
+        return "الرجاء تحديد تاريخ البداية وتاريخ النهاية أولاً.";
+      }
+
+      const start = new Date(startDateVal);
+      const end = new Date(endDateVal);
+
+      if (end <= start) {
+        return "تنبيه: يجب أن يكون تاريخ النهاية بعد تاريخ البداية.";
+      }
+
+      // Calculate Duration
+      const diffTime = Math.abs(end - start);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      const diffWeeks = Math.max(1, Math.ceil(diffDays / 7));
 
       let selectedDetails = selectedIds
         .map((id) => {
@@ -269,13 +377,16 @@ const hizbGroups = Array.from({ length: 60 }, (_, i) => {
 
       return `أريدك أن تكتب لي كود ملف HTML واحد (Single HTML file) متكامل مع تنسيقات Tailwind CSS وجماليات بصرية عالية (Dark mode عصري، تصميم نظيف، خطوط عربية أميري وتاجوال) يعمل كـ "مخطط تفاعلي متقدم لحفظ الأثمان القرآنية برواية نافع المدني".
 
-معلومات الخطة:
-- المدة الزمنية: ${months} أشهر (بواقع 4 أسابيع لكل شهر، إجمالي ${months * 4} أسبوعاً).
-- الأثمان المفصلة المطلوب جدولتها وتوزيعها بالتساوي على الأسابيع:
+معلومات الخطة الزمانية:
+- تاريخ البداية: ${startDateVal}
+- تاريخ النهاية: ${endDateVal}
+- المدة الإجمالية: ${diffDays} يوماً (تُوزّع على ${diffWeeks} أسابيع تقريباً).
+
+الأثمان المفصلة المطلوب جدولتها وتوزيعها بالتساوي على طول هذه الفترة:
 ${selectedDetails}
 
 المطلوب تنفيذه في ملف الـ HTML:
-1. واجهة مستخدم احترافية باللغة العربية (RTL) مع بطاقات أسبوعية منظمة.
+1. واجهة مستخدم احترافية باللغة العربية (RTL) تبدأ بتأريخ الأسابيع بناءً على تاريخ البداية المحدد.
 2. عرض تفاصيل كل ثمن بوضوح داخل جدول الأسبوع (اسم السورة، رقم الحزب، ورقم الآيات البداية والنهاية).
 3. إمكانية تفاعل المستخدم (مثل تحديد إنجاز الأسبوع وتخزين الحالة محلياً عبر LocalStorage).
 4. تسليم الكود البرمجي كاملاً ونظيفاً ضمن صندوق أكواد واحد فقط جاهز للتشغيل.`;
@@ -287,8 +398,8 @@ ${selectedDetails}
 
     copyPromptBtn.addEventListener("click", () => {
       const textToCopy = buildPromptText();
-      if (textToCopy.startsWith("الرجاء")) {
-        alert("الرجاء اختيار ثمن واحد على الأقل أولاً.");
+      if (textToCopy.startsWith("الرجاء") || textToCopy.startsWith("تنبيه")) {
+        alert(textToCopy);
         return;
       }
 
