@@ -1,9 +1,10 @@
 ---
 import { suwar, ahzab, atman } from "../data/index";
 import "../globals.css";
+
 // Helper function with fixed typing for indexing
 const formatCursor = (cursor: { surah: number; ayah: number }) => {
-  const surahName = suwar[`${cursor.surah}`]?.ar || `سورة ${cursor.surah}`;
+  const surahName = suwar[`${cursor.surah}`].name?.ar || `سورة ${cursor.surah}`;
   return `${surahName} (الآية ${cursor.ayah})`;
 };
 ---
@@ -12,110 +13,176 @@ const formatCursor = (cursor: { surah: number; ayah: number }) => {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>فهارس القرآن الكريم | Quran Navigator</title>
-    <!-- Importing a clean Arabic font from Google Fonts -->
+    <title>فهارس القرآن الكريم // الأرشيف الرقمي</title>
+    <!-- Importing clean typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Space+Mono:wght@400;700&family=Amiri:wght@400;700&display=swap"
       rel="stylesheet"
     />
     <style>
-      body {
-        font-family: "Tajawal", sans-serif;
+      :root {
+        --font-primary:
+          "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif;
+        --font-mono: "Space Mono", monospace;
+        --accent-red: #ff2400;
       }
+
+      body {
+        font-family: var(--font-primary);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
       .quran-font {
         font-family: "Amiri", serif;
+      }
+
+      .border-custom {
+        border: 1px solid var(--border-color, #0d0d0d);
+      }
+      .dark .border-custom {
+        border: 1px solid #333333;
+      }
+
+      .border-custom-b {
+        border-bottom: 1px solid #0d0d0d;
+      }
+      .dark .border-custom-b {
+        border-bottom: 1px solid #333333;
       }
     </style>
   </head>
   <body
-    class="bg-linear-to-br from-slate-900 via-emerald-950 to-slate-900 text-slate-100 min-h-screen py-12 px-4 sm:px-6 lg:px-8"
+    class="bg-[#f8f8f8] dark:bg-[#0d0d0d] text-[#0d0d0d] dark:text-[#f8f8f8] min-h-screen selection:bg-[#ff2400] selection:text-white transition-colors duration-200"
   >
-    <main class="max-w-6xl mx-auto space-y-10">
-      <!-- Hero Header -->
-      <header
-        class="text-center space-y-4 py-8 bg-slate-900/60 backdrop-blur-md rounded-3xl border border-emerald-500/20 shadow-2xl"
-      >
-        <div
-          class="inline-flex items-center justify-center p-3 bg-emerald-500/10 rounded-2xl text-emerald-400 mb-2 border border-emerald-500/20"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-8 w-8"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+    <!-- Top Grid Header Bar -->
+    <div
+      class="border-custom-b py-2.5 text-xs font-mono font-bold uppercase tracking-wider bg-white dark:bg-[#111111] sticky top-0 z-50"
+    >
+      <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+        <div class="flex items-center gap-4">
+          <span class="bg-[#ff2400] text-white px-2 py-0.5 text-[11px]"
+            >NAV.01</span
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-            ></path>
-          </svg>
+          <span>فهارس القرآن الكريم // أرشيف البيانات</span>
         </div>
-        <h1
-          class="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-linear-to-r from-emerald-300 via-teal-200 to-emerald-400"
-        >
-          فهارس القرآن الكريم
-        </h1>
-        <p class="text-slate-400 text-lg max-w-xl mx-auto">
-          مرجعك المتكامل لاستعراض السور، والأحزاب، والأثمان بدقة وسهولة.
-        </p>
-      </header>
+        <div class="flex items-center gap-6">
+          <span class="hidden sm:inline font-mono text-[11px] text-[#ff2400]"
+            >[ 114 سورة / 60 حزباً ]</span
+          >
+          <button
+            type="button"
+            id="theme-toggle-btn"
+            class="cursor-pointer text-[11px] px-2.5 py-1 border border-current hover:bg-[#ff2400] hover:text-white transition-colors font-mono"
+          >
+            الوضع: <span id="theme-mode-label">فاتح</span>
+          </button>
+        </div>
+      </div>
+    </div>
 
-      <!-- Navigation Tabs / Section Selector (Visual Only) -->
-      <div class="flex flex-wrap justify-center gap-3">
+    <!-- Primary Navigation Header -->
+    <header class="bg-white dark:bg-[#111111] border-custom-b py-8">
+      <div
+        class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6 items-end"
+      >
+        <div>
+          <a
+            href="#"
+            class="text-6xl font-black tracking-tighter uppercase no-underline text-current"
+          >
+            KONTUR<span class="text-[#ff2400]">.</span>
+          </a>
+        </div>
+        <div
+          class="text-xs font-mono text-gray-600 dark:text-gray-400 border-r border-current pr-6 leading-relaxed"
+        >
+          مرجعك المتكامل لاستعراض السور، والأحزاب، والأثمان وفق مبادئ التصميم
+          المهيكل والمعادلات الشبكية الدقيقة.
+        </div>
+        <ul
+          class="list-none flex md:flex-col gap-2 md:text-left font-mono text-xs uppercase font-bold tracking-wider"
+        >
+          <li>
+            <a href="#suwar" class="hover:text-[#ff2400] transition-colors"
+              >01 / السور المباركة</a
+            >
+          </li>
+          <li>
+            <a href="#ahzab" class="hover:text-[#ff2400] transition-colors"
+              >02 / الأحزاب القرآنية</a
+            >
+          </li>
+          <li>
+            <a href="#atman" class="hover:text-[#ff2400] transition-colors"
+              >03 / الأثمان والأجزاء</a
+            >
+          </li>
+        </ul>
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-12 space-y-16">
+      <!-- Navigation Jump Tabs -->
+      <div class="flex flex-wrap gap-3 font-mono text-xs">
         <a
           href="#suwar"
-          class="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-medium shadow-lg shadow-emerald-900/30 transition-all"
-          >السور</a
+          class="px-4 py-2 border-custom bg-white dark:bg-[#111111] hover:bg-[#ff2400] hover:text-white hover:border-[#ff2400] transition-colors font-bold uppercase"
         >
+          [ 01 // السور ]
+        </a>
         <a
           href="#ahzab"
-          class="px-6 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 font-medium transition-all"
-          >الأحزاب</a
+          class="px-4 py-2 border-custom bg-white dark:bg-[#111111] hover:bg-[#ff2400] hover:text-white hover:border-[#ff2400] transition-colors font-bold uppercase"
         >
+          [ 02 // الأحزاب ]
+        </a>
         <a
           href="#atman"
-          class="px-6 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 font-medium transition-all"
-          >الأثمان</a
+          class="px-4 py-2 border-custom bg-white dark:bg-[#111111] hover:bg-[#ff2400] hover:text-white hover:border-[#ff2400] transition-colors font-bold uppercase"
         >
+          [ 03 // الأثمان ]
+        </a>
       </div>
 
       <!-- Suwar Section -->
       <section
         id="suwar"
-        class="bg-slate-900/80 backdrop-blur-md rounded-3xl border border-slate-800 p-6 sm:p-8 space-y-6 shadow-xl"
+        class="bg-white dark:bg-[#111111] border-custom p-8 space-y-6 shadow-sm"
       >
-        <div
-          class="flex items-center justify-between border-b border-slate-800 pb-4"
-        >
+        <div class="flex items-center justify-between border-custom-b pb-4">
           <div>
-            <h2 class="text-2xl font-bold text-emerald-400">السور المباركة</h2>
-            <p class="text-xs text-slate-400 mt-1">إجمالي 114 سورة قرآنية</p>
+            <span class="font-mono text-xs font-bold text-[#ff2400]"
+              >[ INDEX.01 ]</span
+            >
+            <h2 class="text-2xl font-black uppercase tracking-tight mt-1">
+              السور المباركة
+            </h2>
           </div>
           <span
-            class="px-3 py-1 bg-emerald-500/10 text-emerald-400 text-xs font-semibold rounded-full border border-emerald-500/20"
-            >Suwar</span
+            class="font-mono text-xs px-3 py-1 bg-[#ff2400]/10 text-[#ff2400] font-bold border border-[#ff2400]/30"
           >
+            114 SUWAR
+          </span>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {
             Object.entries(suwar).map(([number, surah]) => (
-              <div class="group flex items-center justify-between p-4 rounded-2xl bg-slate-800/50 border border-slate-800 hover:border-emerald-500/40 hover:bg-slate-800 transition-all">
+              <div class="group flex items-center justify-between p-4 border border-gray-200 dark:border-gray-800 hover:border-[#ff2400] bg-gray-50 dark:bg-black transition-all">
                 <div class="flex items-center gap-4">
-                  <span class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 font-bold flex items-center justify-center border border-emerald-500/20 group-hover:bg-emerald-500 group-hover:text-slate-950 transition-colors">
+                  <span class="w-10 h-10 font-mono font-bold bg-[#ff2400] text-white flex items-center justify-center text-xs">
                     {number}
                   </span>
                   <div>
-                    <h3 class="quran-font font-bold text-slate-100 text-xl">
-                      {surah.ar}
+                    <h3 class="quran-font font-bold text-lg leading-tight">
+                      {surah.name.ar}
                     </h3>
-                    <span class="text-xs text-slate-400 tracking-wide">
-                      {surah.en}
+                    <span class="text-xs font-mono text-gray-500 uppercase tracking-wide">
+                      {surah.name.en}
                     </span>
                   </div>
                 </div>
@@ -128,40 +195,47 @@ const formatCursor = (cursor: { surah: number; ayah: number }) => {
       <!-- Ahzab Section -->
       <section
         id="ahzab"
-        class="bg-slate-900/80 backdrop-blur-md rounded-3xl border border-slate-800 p-6 sm:p-8 space-y-6 shadow-xl"
+        class="bg-white dark:bg-[#111111] border-custom p-8 space-y-6 shadow-sm"
       >
-        <div
-          class="flex items-center justify-between border-b border-slate-800 pb-4"
-        >
+        <div class="flex items-center justify-between border-custom-b pb-4">
           <div>
-            <h2 class="text-2xl font-bold text-teal-400">الأحزاب القرآنية</h2>
-            <p class="text-xs text-slate-400 mt-1">تقسيم القرآن إلى 60 حزباً</p>
+            <span class="font-mono text-xs font-bold text-[#ff2400]"
+              >[ INDEX.02 ]</span
+            >
+            <h2 class="text-2xl font-black uppercase tracking-tight mt-1">
+              الأحزاب القرآنية
+            </h2>
           </div>
           <span
-            class="px-3 py-1 bg-teal-500/10 text-teal-400 text-xs font-semibold rounded-full border border-teal-500/20"
-            >Ahzab</span
+            class="font-mono text-xs px-3 py-1 bg-[#ff2400]/10 text-[#ff2400] font-bold border border-[#ff2400]/30"
           >
+            60 AHZAB
+          </span>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {
             Object.entries(ahzab).map(([number, range]) => (
-              <div class="p-5 rounded-2xl bg-slate-800/50 border border-slate-800 hover:border-teal-500/40 transition-all space-y-3">
+              <div class="p-4 border border-gray-200 dark:border-gray-800 hover:border-[#ff2400] bg-gray-50 dark:bg-black transition-all space-y-3">
                 <div class="flex items-center justify-between">
-                  <span class="text-xs font-bold bg-teal-500/10 text-teal-300 px-3 py-1 rounded-lg border border-teal-500/20">
+                  <span class="font-mono text-xs font-bold text-[#ff2400]">
                     الحزب {number}
                   </span>
                 </div>
-                <div class="text-xs text-slate-300 space-y-2 bg-slate-900/50 p-3 rounded-xl border border-slate-800">
+                <div class="text-xs font-mono space-y-2 p-3 bg-white dark:bg-[#111111] border border-gray-200 dark:border-gray-800">
                   <div class="flex justify-between items-center">
-                    <span class="text-slate-400 font-medium">البداية:</span>
-                    <span class="font-semibold text-emerald-300">
+                    <span class="text-gray-500 font-bold uppercase">
+                      البداية:
+                    </span>
+                    <span class="font-bold text-current">
                       {formatCursor(range.start)}
                     </span>
                   </div>
                   <div class="flex justify-between items-center">
-                    <span class="text-slate-400 font-medium">النهاية:</span>
-                    <span class="font-semibold text-emerald-300">
+                    <span class="text-gray-500 font-bold uppercase">
+                      النهاية:
+                    </span>
+                    <span class="font-bold text-current">
                       {formatCursor(range.end)}
                     </span>
                   </div>
@@ -173,45 +247,45 @@ const formatCursor = (cursor: { surah: number; ayah: number }) => {
       </section>
 
       <!-- Atman Section -->
-      <!-- Atman Section -->
       <section
         id="atman"
-        class="bg-slate-900/80 backdrop-blur-md rounded-3xl border border-slate-800 p-6 sm:p-8 space-y-6 shadow-xl"
+        class="bg-white dark:bg-[#111111] border-custom p-8 space-y-6 shadow-sm"
       >
-        <div
-          class="flex items-center justify-between border-b border-slate-800 pb-4"
-        >
+        <div class="flex items-center justify-between border-custom-b pb-4">
           <div>
-            <h2 class="text-2xl font-bold text-amber-400">الأثمان (Atman)</h2>
-            <p class="text-xs text-slate-400 mt-1">
-              تقسيم الأحزاب إلى أثمان (كل ثمن = نصف ربع)
-            </p>
+            <span class="font-mono text-xs font-bold text-[#ff2400]"
+              >[ INDEX.03 ]</span
+            >
+            <h2 class="text-2xl font-black uppercase tracking-tight mt-1">
+              الأثمان (Atman)
+            </h2>
           </div>
           <span
-            class="px-3 py-1 bg-amber-500/10 text-amber-400 text-xs font-semibold rounded-full border border-amber-500/20"
-            >Thumn / Atman</span
+            class="font-mono text-xs px-3 py-1 bg-[#ff2400]/10 text-[#ff2400] font-bold border border-[#ff2400]/30"
           >
+            480 ATMAN
+          </span>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
           {
             Object.entries(atman).map(([number, range]) => (
-              <div class="p-4 rounded-2xl bg-slate-800/50 border border-slate-800 hover:border-amber-500/40 transition-all space-y-2.5">
+              <div class="p-3.5 border border-gray-200 dark:border-gray-800 hover:border-[#ff2400] bg-gray-50 dark:bg-black transition-all space-y-2">
                 <div class="flex items-center justify-between">
-                  <span class="text-xs font-bold bg-amber-500/10 text-amber-300 px-2.5 py-1 rounded-lg border border-amber-500/20">
+                  <span class="font-mono text-xs font-bold text-[#ff2400]">
                     الثمن {number}
                   </span>
                 </div>
-                <div class="text-xs text-slate-300 space-y-1.5 bg-slate-900/50 p-2.5 rounded-xl border border-slate-800">
+                <div class="text-[11px] font-mono space-y-1.5 p-2.5 bg-white dark:bg-[#111111] border border-gray-200 dark:border-gray-800">
                   <div class="flex justify-between items-center">
-                    <span class="text-slate-400 font-medium">من:</span>
-                    <span class="font-medium text-amber-200">
+                    <span class="text-gray-500 font-bold">من:</span>
+                    <span class="font-bold text-current">
                       {formatCursor(range.start)}
                     </span>
                   </div>
                   <div class="flex justify-between items-center">
-                    <span class="text-slate-400 font-medium">إلى:</span>
-                    <span class="font-medium text-amber-200">
+                    <span class="text-gray-500 font-bold">إلى:</span>
+                    <span class="font-bold text-current">
                       {formatCursor(range.end)}
                     </span>
                   </div>
@@ -222,5 +296,17 @@ const formatCursor = (cursor: { surah: number; ayah: number }) => {
         </div>
       </section>
     </main>
+
+    <!-- Footer -->
+    <footer
+      class="bg-white dark:bg-[#111111] border-t border-current py-8 mt-16 font-mono text-xs uppercase"
+    >
+      <div
+        class="max-w-7xl mx-auto px-6 flex flex-wrap justify-between items-center gap-4"
+      >
+        <div>&copy; 2026 KONTUR ARCHIVE // فهارس القرآن الكريم</div>
+        <div class="text-[#ff2400] font-bold">جميع الحقوق محفوظة</div>
+      </div>
+    </footer>
   </body>
 </html>

@@ -21,206 +21,347 @@ const hizbGroups = Array.from({ length: 60 }, (_, i) => {
 ---
 
 <Layout
-  className="bg-slate-950 text-slate-100 min-h-screen py-8 px-4 sm:px-6 lg:px-8 font-sans selection:bg-emerald-500 selection:text-white"
-  title="مخطط حفظ الأثمان | Planner Prompt Builder"
+  className="bg-[#f8f8f8] dark:bg-[#0d0d0d] text-[#0d0d0d] dark:text-[#f8f8f8] min-h-screen font-sans selection:bg-[#ff2400] selection:text-white transition-colors duration-200"
+  title="HIFZ — نظام تخطيط الحفظ السويسري"
 >
-  <main class="max-w-5xl mx-auto space-y-6 py-6">
-    <!-- Hero Header -->
-    <header
-      class="text-center space-y-3 py-8 px-6 rounded-3xl bg-gradient-to-b from-emerald-950/40 via-slate-900/60 to-slate-900/40 border border-emerald-500/10 backdrop-blur-xl relative overflow-hidden shadow-2xl"
-    >
-      <div
-        class="absolute -top-24 -left-24 w-60 h-60 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"
-      >
-      </div>
-      <div
-        class="absolute -bottom-24 -right-24 w-60 h-60 bg-teal-500/10 rounded-full blur-3xl pointer-events-none"
-      >
-      </div>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Space+Mono:wght@400;700&display=swap");
 
-      <span
-        class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
-      >
-        ✨ أداة توليد الموجهات الذكية
-      </span>
-      <h1
-        class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white font-serif"
-      >
-        مخطط حفظ الأثمان <span class="text-emerald-400">حسب الأحزاب</span>
-      </h1>
-      <p
-        class="text-slate-400 text-sm sm:text-base max-w-lg mx-auto leading-relaxed"
-      >
-        اختر الأثمان المطلوبة وحدد تاريخ البداية والنهاية لتوليد موجه AI مخصص
-        وجاهز للنسخ.
-      </p>
-    </header>
+    :root {
+      --font-swiss:
+        "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Helvetica, Arial, sans-serif;
+      --font-mono: "Space Mono", monospace;
+      --swiss-red: #ff2400;
+    }
 
-    <!-- Main Control Panel -->
+    body {
+      font-family: var(--font-swiss);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      direction: rtl;
+      text-align: right;
+    }
+
+    .border-swiss {
+      border: 1px solid var(--swiss-border, #0d0d0d);
+    }
+    .dark .border-swiss {
+      border: 1px solid #333333;
+    }
+
+    .swiss-input {
+      background: transparent;
+      border: 1px solid currentColor;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      direction: ltr;
+      text-align: right;
+    }
+  </style>
+
+  <!-- Top Grid Header Bar -->
+  <div
+    class="border-b border-current py-2.5 text-xs font-mono font-bold uppercase tracking-wider bg-white dark:bg-[#111111] sticky top-0 z-50"
+  >
+    <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+      <div class="flex items-center gap-4">
+        <span class="bg-[#ff2400] text-white px-2 py-0.5 text-[11px]"
+          >SYS.04</span
+        >
+        <span> مخطط القرآن</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <span id="selection-counter" class="text-[#ff2400] font-mono"
+          >[ تم تحديد 0 ثمناً ]</span
+        >
+        <button
+          type="button"
+          id="theme-toggle-btn"
+          class="cursor-pointer text-[11px] px-2.5 py-1 border border-current hover:bg-[#ff2400] hover:text-white transition-colors"
+        >
+          الوضع: <span id="theme-mode-label">فاتح</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Primary Navigation -->
+  <header class="bg-white dark:bg-[#111111] border-b border-current py-8">
     <div
-      class="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 space-y-6 shadow-xl backdrop-blur-md"
+      class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6 items-end"
     >
-      <!-- Section 1: Date Range Selector -->
+      <div>
+        <a
+          href="#"
+          class="text-6xl font-black tracking-tighter uppercase no-underline text-current"
+        >
+          HIFZ<span class="text-[#ff2400]">.</span>
+        </a>
+      </div>
       <div
-        class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-slate-800/80"
+        class="text-xs font-mono text-gray-600 dark:text-gray-400 border-r border-current pr-6 leading-relaxed"
       >
-        <div>
-          <h2
-            class="text-base font-bold text-slate-100 flex items-center gap-2"
+        واجهة شبكية معيارية عالية الكثافة مصممة للقراءة الفورية والتنفيذ السريع
+        بدون حشو بصري.
+      </div>
+      <ul
+        class="list-none flex md:flex-col gap-2 md:text-left font-mono text-xs uppercase font-bold tracking-wider"
+      >
+        <li>
+          <a
+            href="#section-dates"
+            class="hover:text-[#ff2400] transition-colors">01 / النطاق الزمني</a
           >
-            <span
-              class="flex items-center justify-center w-6 h-6 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold border border-emerald-500/20"
-              >1</span
+        </li>
+        <li>
+          <a
+            href="#section-atman"
+            class="hover:text-[#ff2400] transition-colors"
+            >02 / مصفوفة الأثمان</a
+          >
+        </li>
+        <li>
+          <a
+            href="#section-preview"
+            class="hover:text-[#ff2400] transition-colors">03 / معاينة الموجه</a
+          >
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-7xl mx-auto px-6 py-10 space-y-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Left Column: Controls (Dates + Features) -->
+      <div class="space-y-8 lg:col-span-1">
+        <!-- Section 1: Temporal Range -->
+        <div
+          id="section-dates"
+          class="bg-white dark:bg-[#111111] border-swiss p-6 space-y-4 shadow-sm"
+        >
+          <div
+            class="border-b border-current pb-3 flex justify-between items-center"
+          >
+            <span class="font-mono text-xs font-bold text-[#ff2400]"
+              >[ 01 ]</span
             >
-            تحديد الفترة الزمنية (تاريخ البداية والنهاية)
-          </h2>
-          <p class="text-xs text-slate-400 mt-1">
-            حدد تاريخ بدء الخطة وانتهائها ليتم احتساب الأسابيع تلقائياً
-          </p>
+            <h3 class="font-mono text-xs uppercase font-bold tracking-wider">
+              إعدادات الفترة
+            </h3>
+          </div>
+          <div class="space-y-3 font-mono text-xs">
+            <div>
+              <label
+                for="start-date-input"
+                class="block uppercase font-bold text-gray-500 mb-1"
+                >تاريخ البداية:</label
+              >
+              <input
+                type="date"
+                id="start-date-input"
+                class="swiss-input w-full p-2 cursor-pointer text-current"
+              />
+            </div>
+            <div>
+              <label
+                for="end-date-input"
+                class="block uppercase font-bold text-gray-500 mb-1"
+                >تاريخ النهاية:</label
+              >
+              <input
+                type="date"
+                id="end-date-input"
+                class="swiss-input w-full p-2 cursor-pointer text-current"
+              />
+            </div>
+          </div>
         </div>
 
-        <div class="flex flex-wrap items-center gap-3">
-          <!-- Start Date -->
+        <!-- Section 3: Prompt Feature Configuration -->
+        <div
+          class="bg-white dark:bg-[#111111] border-swiss p-6 space-y-4 shadow-sm"
+        >
           <div
-            class="flex items-center gap-2 bg-slate-950/60 px-3 py-2 rounded-2xl border border-slate-800"
+            class="border-b border-current pb-3 flex justify-between items-center"
           >
-            <label
-              for="start-date-input"
-              class="text-xs text-slate-400 font-medium">من:</label
+            <span class="font-mono text-xs font-bold text-[#ff2400]"
+              >[ 02 ]</span
             >
-            <input
-              type="date"
-              id="start-date-input"
-              class="bg-slate-900 border border-slate-700/80 rounded-xl px-2.5 py-1.5 text-slate-100 text-xs font-medium focus:outline-none focus:border-emerald-500 cursor-pointer"
-            />
+            <h3 class="font-mono text-xs uppercase font-bold tracking-wider">
+              خصائص التطبيق المطلوبة
+            </h3>
           </div>
-
-          <!-- End Date -->
-          <div
-            class="flex items-center gap-2 bg-slate-950/60 px-3 py-2 rounded-2xl border border-slate-800"
-          >
+          <div class="space-y-2 font-mono text-xs">
             <label
-              for="end-date-input"
-              class="text-xs text-slate-400 font-medium">إلى:</label
+              class="flex items-center gap-3 p-2.5 border-swiss cursor-pointer hover:bg-gray-50 dark:hover:bg-black transition-colors"
             >
-            <input
-              type="date"
-              id="end-date-input"
-              class="bg-slate-900 border border-slate-700/80 rounded-xl px-2.5 py-1.5 text-slate-100 text-xs font-medium focus:outline-none focus:border-emerald-500 cursor-pointer"
-            />
+              <input
+                type="checkbox"
+                id="opt-theme"
+                checked
+                class="accent-[#ff2400] w-4 h-4"
+              />
+              <span>زر الوضع الفاتح والداكن</span>
+            </label>
+            <label
+              class="flex items-center gap-3 p-2.5 border-swiss cursor-pointer hover:bg-gray-50 dark:hover:bg-black transition-colors"
+            >
+              <input
+                type="checkbox"
+                id="opt-json"
+                checked
+                class="accent-[#ff2400] w-4 h-4"
+              />
+              <span>تصدير واسترجاع JSON</span>
+            </label>
+            <label
+              class="flex items-center gap-3 p-2.5 border-swiss cursor-pointer hover:bg-gray-50 dark:hover:bg-black transition-colors"
+            >
+              <input
+                type="checkbox"
+                id="opt-view"
+                checked
+                class="accent-[#ff2400] w-4 h-4"
+              />
+              <span>التبديل بين الشبكة والقائمة</span>
+            </label>
+            <label
+              class="flex items-center gap-3 p-2.5 border-swiss cursor-pointer hover:bg-gray-50 dark:hover:bg-black transition-colors"
+            >
+              <input
+                type="checkbox"
+                id="opt-print"
+                checked
+                class="accent-[#ff2400] w-4 h-4"
+              />
+              <span>تنسيقات الطباعة (@media print)</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Action CTA Box (Sticky on Desktop) -->
+        <div
+          class="sticky top-16 bg-white dark:bg-[#111111] border-swiss p-6 space-y-4 shadow-md"
+        >
+          <div
+            class="border-b border-current pb-3 flex justify-between items-center"
+          >
+            <span class="font-mono text-xs font-bold text-[#ff2400]"
+              >[ 03 ]</span
+            >
+            <h3 class="font-mono text-xs uppercase font-bold tracking-wider">
+              التنفيذ
+            </h3>
+          </div>
+          <button
+            type="button"
+            id="copy-prompt-btn"
+            class="w-full py-4 bg-[#ff2400] hover:bg-black dark:hover:bg-white dark:hover:text-black text-white font-mono font-bold text-xs uppercase tracking-wider transition-colors cursor-pointer flex items-center justify-center gap-2"
+          >
+            <span>⚡ توليد ونسخ موجه الذكاء الاصطناعي</span>
+          </button>
+          <div
+            id="toast"
+            class="hidden p-2 border border-[#ff2400] bg-[#ff2400]/10 text-[#ff2400] font-mono text-[11px] font-bold text-center uppercase"
+          >
+            ✓ تم النسخ بنجاح إلى الحافظة!
           </div>
         </div>
       </div>
 
-      <!-- Section 2: Atman Selection -->
-      <div class="space-y-4">
-        <div class="flex flex-wrap items-center justify-between gap-3">
+      <!-- Right Column: Atman Selection Matrix -->
+      <div
+        id="section-atman"
+        class="bg-white dark:bg-[#111111] border-swiss p-6 space-y-6 lg:col-span-2 shadow-sm"
+      >
+        <div
+          class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-current"
+        >
           <div>
-            <h2
-              class="text-base font-bold text-slate-100 flex items-center gap-2"
+            <span class="font-mono text-xs font-bold text-[#ff2400]"
+              >[ MATRIX ]</span
             >
-              <span
-                class="flex items-center justify-center w-6 h-6 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold border border-emerald-500/20"
-                >2</span
-              >
+            <h2 class="text-lg font-black uppercase tracking-tight mt-0.5">
               اختيار الأثمان والأحزاب
             </h2>
-            <p class="text-xs text-slate-400 mt-0.5">
-              انقر على الأثمان الفردية أو حدد الحزب بالكامل
-            </p>
           </div>
-
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-2 font-mono">
             <button
               type="button"
               id="select-all"
-              class="px-3 py-1.5 text-xs font-medium bg-slate-800 hover:bg-slate-700/80 text-slate-300 border border-slate-700 rounded-xl transition-all cursor-pointer"
+              class="px-3 py-1.5 text-xs font-bold uppercase border border-current hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors cursor-pointer"
             >
-              تحديد الكل
+              [ تحديد الكل ]
             </button>
             <button
               type="button"
               id="deselect-all"
-              class="px-3 py-1.5 text-xs font-medium bg-slate-800 hover:bg-slate-700/80 text-slate-400 border border-slate-700 rounded-xl transition-all cursor-pointer hover:text-slate-200"
+              class="px-3 py-1.5 text-xs font-bold uppercase border border-current hover:bg-[#ff2400] hover:text-white transition-colors cursor-pointer"
             >
-              إلغاء التحديد
+              [ إلغاء الكل ]
             </button>
           </div>
         </div>
 
-        <!-- Hizb Groups Grid -->
-        <div
-          class="space-y-3 max-h-[520px] overflow-y-auto pr-1 pl-1 scrollbar-thin scrollbar-thumb-slate-800"
-        >
+        <!-- High-Density Hizb Grid (All opened by default via `open`) -->
+        <div class="space-y-2.5 max-h-160 overflow-y-auto pl-1">
           {
             hizbGroups.map((hizb) => (
-              <details class="group bg-slate-950/40 border border-slate-800/80 rounded-2xl overflow-hidden transition-all duration-200 [&[open]]:bg-slate-950/80 [&[open]]:border-emerald-500/30">
-                <summary class="flex items-center justify-between px-4 py-3 cursor-pointer select-none list-none hover:bg-slate-900/50 transition-colors">
+              <details
+                open
+                class="group bg-gray-50 dark:bg-black border-swiss overflow-hidden transition-all [[open]]:bg-white dark:[[open]]:bg-[#181818]"
+              >
+                <summary class="flex items-center justify-between px-4 py-3 cursor-pointer select-none font-mono text-xs font-bold uppercase">
                   <div class="flex items-center gap-3">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500 group-open:scale-125 transition-transform" />
-                    <span class="font-bold text-sm text-slate-200">
-                      الحزب رقم {hizb.hizbNumber}
-                    </span>
-                    <span class="text-xs text-slate-500 font-medium">
-                      (8 أثمان)
-                    </span>
+                    <span class="text-[#ff2400]">الحزب {hizb.hizbNumber}</span>
+                    <span class="text-[10px] text-gray-500">[ 8 أثمان ]</span>
                   </div>
-
                   <div class="flex items-center gap-3">
                     <button
                       type="button"
-                      class="select-hizb-btn text-xs font-medium bg-emerald-500/10 text-emerald-400 px-3 py-1 rounded-lg border border-emerald-500/20 hover:bg-emerald-500/20 transition-all cursor-pointer"
+                      class="select-hizb-btn text-[10px] px-2 py-0.5 border border-current hover:bg-[#ff2400] hover:text-white hover:border-[#ff2400] transition-colors cursor-pointer"
                       data-hizb={hizb.hizbNumber}
                     >
-                      تحديد الحزب كامل
+                      + تحديد الحزب
                     </button>
-
-                    <svg
-                      class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
+                    <span class="text-xs group-open:rotate-180 transition-transform">
+                      ▼
+                    </span>
                   </div>
                 </summary>
 
-                <div class="p-4 border-t border-slate-800/50 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 bg-slate-900/30">
+                <div class="p-3 border-t border-current grid grid-cols-1 sm:grid-cols-2 gap-2 bg-white dark:bg-[#111111]">
                   {hizb.atmanList.map((atmanItem) => {
                     const startSurah =
-                      suwar[`${atmanItem.range.start.surah}`]?.ar ||
+                      suwar[`${atmanItem.range.start.surah}`]?.name?.ar ||
                       `سورة ${atmanItem.range.start.surah}`;
                     const endSurah =
-                      suwar[`${atmanItem.range.end.surah}`]?.ar ||
+                      suwar[`${atmanItem.range.end.surah}`]?.name?.ar ||
                       `سورة ${atmanItem.range.end.surah}`;
                     return (
-                      <label class="relative flex items-start gap-3 p-3 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/40 cursor-pointer transition-all has-[:checked]:bg-emerald-950/20 has-[:checked]:border-emerald-500/50 group/item select-none">
+                      <label class="relative flex items-start gap-2.5 p-2.5 border border-gray-200 dark:border-gray-800 hover:border-[#ff2400] cursor-pointer transition-colors has-checked:bg-[#ff2400]/5 has-checked:border-[#ff2400] select-none text-xs">
                         <input
                           type="checkbox"
                           name="atman-checkbox"
                           value={atmanItem.id}
                           data-hizb={hizb.hizbNumber}
-                          class="mt-1 w-4 h-4 rounded border-slate-700 bg-slate-950 text-emerald-500 focus:ring-emerald-500 focus:ring-offset-slate-900 transition-all cursor-pointer"
+                          class="mt-0.5 w-3.5 h-3.5 accent-[#ff2400] cursor-pointer"
                         />
-                        <div class="space-y-1 text-xs">
-                          <div class="font-bold text-slate-200 group-has-[:checked]/item:text-emerald-300">
+                        <div class="space-y-0.5 w-full font-mono">
+                          <div class="font-bold text-[#ff2400] text-[11px]">
                             الثمن {atmanItem.id}
                           </div>
-                          <div class="text-slate-400 text-[11px] leading-tight">
+                          <div class="text-gray-600 dark:text-gray-400 text-[10px] leading-tight">
                             من:{" "}
-                            <span class="text-slate-300 font-medium">
+                            <span class="font-bold text-current">
                               {startSurah} ({atmanItem.range.start.ayah})
                             </span>
                           </div>
-                          <div class="text-slate-400 text-[11px] leading-tight">
+                          <div class="text-gray-600 dark:text-gray-400 text-[10px] leading-tight">
                             إلى:{" "}
-                            <span class="text-slate-300 font-medium">
+                            <span class="font-bold text-current">
                               {endSurah} ({atmanItem.range.end.ayah})
                             </span>
                           </div>
@@ -234,59 +375,69 @@ const hizbGroups = Array.from({ length: 60 }, (_, i) => {
           }
         </div>
       </div>
-
-      <!-- Copy Action CTA -->
-      <div class="pt-4 border-t border-slate-800 space-y-3">
-        <button
-          type="button"
-          id="copy-prompt-btn"
-          class="w-full py-4 rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600 hover:opacity-95 text-white font-bold text-base shadow-lg shadow-emerald-950/50 transition-all cursor-pointer flex items-center justify-center gap-2 group active:scale-[0.99]"
-        >
-          <svg
-            class="w-5 h-5 text-emerald-200 group-hover:scale-110 transition-transform"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-            ></path>
-          </svg>
-          <span>نسخ موجه الذكاء الاصطناعي (AI Prompt)</span>
-        </button>
-
-        <div
-          id="toast"
-          class="hidden p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-center text-xs sm:text-sm font-medium animate-fade-in"
-        >
-          ✅ تم نسخ الموجه بنجاح إلى الحافظة!
-        </div>
-      </div>
     </div>
 
-    <!-- Output Preview Box -->
+    <!-- Section 4: Output Preview Box -->
     <section
-      class="bg-slate-900/50 border border-slate-800 rounded-3xl p-5 space-y-3"
+      id="section-preview"
+      class="bg-white dark:bg-[#111111] border-swiss p-6 space-y-3 shadow-sm"
     >
-      <div class="flex items-center justify-between">
-        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">
-          معاينة نص الموجه
-        </h3>
-        <span class="text-[11px] text-slate-500 font-mono">Auto-generated</span>
+      <div class="flex items-center justify-between font-mono text-xs">
+        <span class="font-bold uppercase text-[#ff2400]"
+          >[ معاينة الموجه الحية ]</span
+        >
+        <span class="text-gray-500">UTF-8 / SWISS MARKDOWN</span>
       </div>
       <textarea
         id="prompt-preview"
-        rows="6"
+        rows="8"
         readonly
-        class="w-full bg-slate-950/80 border border-slate-800/80 rounded-2xl p-4 text-xs text-slate-300 focus:outline-none resize-none font-mono leading-relaxed"
-        placeholder="اختر الأثمان والتواريخ لتظهر المعاينة هنا..."></textarea>
+        class="w-full bg-gray-50 dark:bg-black border border-current p-4 font-mono text-xs text-current leading-relaxed resize-none focus:outline-none"
+        placeholder="اختر التواريخ والأثمان أعلاه لتوليد نص الموجه..."
+      ></textarea>
     </section>
   </main>
 
+  <!-- Footer -->
+  <footer
+    class="bg-white dark:bg-[#111111] border-t border-current py-6 mt-12 font-mono text-xs uppercase"
+  >
+    <div
+      class="max-w-7xl mx-auto px-6 flex flex-wrap justify-between items-center gap-4"
+    >
+      <div>&copy; 2026 HIFZ ARCHIVE //</div>
+    </div>
+  </footer>
+
   <script define:vars={{ atmanData: atman, suwarData: suwar }}>
+    // Theme Switcher Fixed with proper class toggle and persistence
+    const themeToggleBtn = document.getElementById("theme-toggle-btn");
+    const themeModeLabel = document.getElementById("theme-mode-label");
+
+    function initTheme() {
+      const savedTheme = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)",
+      ).matches;
+
+      if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+        document.documentElement.classList.add("dark");
+        themeModeLabel.textContent = "داكن";
+      } else {
+        document.documentElement.classList.remove("dark");
+        themeModeLabel.textContent = "فاتح";
+      }
+    }
+
+    themeToggleBtn.addEventListener("click", () => {
+      const isDark = document.documentElement.classList.toggle("dark");
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+      themeModeLabel.textContent = isDark ? "داكن" : "فاتح";
+    });
+
+    initTheme();
+
+    // Elements
     const selectAllBtn = document.getElementById("select-all");
     const deselectAllBtn = document.getElementById("deselect-all");
     const checkboxes = document.querySelectorAll(
@@ -298,8 +449,14 @@ const hizbGroups = Array.from({ length: 60 }, (_, i) => {
     const endDateInput = document.getElementById("end-date-input");
     const promptPreview = document.getElementById("prompt-preview");
     const toast = document.getElementById("toast");
+    const selectionCounter = document.getElementById("selection-counter");
 
-    // Initialize Default Dates (Today -> +1 Month)
+    const optTheme = document.getElementById("opt-theme");
+    const optJson = document.getElementById("opt-json");
+    const optView = document.getElementById("opt-view");
+    const optPrint = document.getElementById("opt-print");
+
+    // Default Dates
     const today = new Date();
     const nextMonth = new Date();
     nextMonth.setMonth(today.getMonth() + 1);
@@ -307,13 +464,20 @@ const hizbGroups = Array.from({ length: 60 }, (_, i) => {
     startDateInput.value = today.toISOString().split("T")[0];
     endDateInput.value = nextMonth.toISOString().split("T")[0];
 
+    function updateCounter() {
+      const count = Array.from(checkboxes).filter((cb) => cb.checked).length;
+      selectionCounter.textContent = `[ تم تحديد ${count} ثمناً ]`;
+    }
+
     selectAllBtn.addEventListener("click", () => {
       checkboxes.forEach((cb) => (cb.checked = true));
+      updateCounter();
       updatePreview();
     });
 
     deselectAllBtn.addEventListener("click", () => {
       checkboxes.forEach((cb) => (cb.checked = false));
+      updateCounter();
       updatePreview();
     });
 
@@ -326,13 +490,23 @@ const hizbGroups = Array.from({ length: 60 }, (_, i) => {
         );
         const allChecked = Array.from(hizbCheckboxes).every((cb) => cb.checked);
         hizbCheckboxes.forEach((cb) => (cb.checked = !allChecked));
+        updateCounter();
         updatePreview();
       });
     });
 
-    checkboxes.forEach((cb) => cb.addEventListener("change", updatePreview));
+    checkboxes.forEach((cb) =>
+      cb.addEventListener("change", () => {
+        updateCounter();
+        updatePreview();
+      }),
+    );
+
     startDateInput.addEventListener("change", updatePreview);
     endDateInput.addEventListener("change", updatePreview);
+    [optTheme, optJson, optView, optPrint].forEach((opt) =>
+      opt?.addEventListener("change", updatePreview),
+    );
 
     function buildPromptText() {
       const selectedIds = Array.from(checkboxes)
@@ -341,14 +515,14 @@ const hizbGroups = Array.from({ length: 60 }, (_, i) => {
         .sort((a, b) => a - b);
 
       if (selectedIds.length === 0) {
-        return "الرجاء اختيار ثمن واحد على الأقل لتوليد الموجه.";
+        return "خطأ: الرجاء اختيار ثمن واحد على الأقل.";
       }
 
       const startDateVal = startDateInput.value;
       const endDateVal = endDateInput.value;
 
       if (!startDateVal || !endDateVal) {
-        return "الرجاء تحديد تاريخ البداية وتاريخ النهاية أولاً.";
+        return "خطأ: الرجاء تحديد تاريخ البداية والنهاية.";
       }
 
       const start = new Date(startDateVal);
@@ -358,8 +532,7 @@ const hizbGroups = Array.from({ length: 60 }, (_, i) => {
         return "تنبيه: يجب أن يكون تاريخ النهاية بعد تاريخ البداية.";
       }
 
-      // Calculate Duration
-      const diffTime = Math.abs(end - start);
+      const diffTime = Math.abs(end.getTime() - start.getTime());
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
       const diffWeeks = Math.max(1, Math.ceil(diffDays / 7));
 
@@ -367,50 +540,72 @@ const hizbGroups = Array.from({ length: 60 }, (_, i) => {
         .map((id) => {
           const range = atmanData[id];
           const startSurah =
-            suwarData[range.start.surah]?.ar || `سورة ${range.start.surah}`;
+            suwarData[range.start.surah]?.name?.ar ||
+            `سورة ${range.start.surah}`;
           const endSurah =
-            suwarData[range.end.surah]?.ar || `سورة ${range.end.surah}`;
+            suwarData[range.end.surah]?.name?.ar || `سورة ${range.end.surah}`;
           const hizbNum = Math.ceil(id / 8);
-          return `الثمن ${id} (الحزب ${hizbNum}): من ${startSurah} (آية ${range.start.ayah}) إلى ${endSurah} (آية ${range.end.ayah})`;
+          return `الثمن ${id} (الحزب ${hizbNum}): من ${startSurah} (${range.start.ayah}) إلى ${endSurah} (${range.end.ayah})`;
         })
         .join("\n");
 
-      return `أريدك أن تكتب لي كود ملف HTML واحد (Single HTML file) متكامل مع تنسيقات Tailwind CSS وجماليات بصرية عالية (Dark mode عصري، تصميم نظيف، خطوط عربية أميري وتاجوال) يعمل كـ "مخطط تفاعلي متقدم لحفظ الأثمان القرآنية برواية نافع المدني".
+      let specs = [];
+      specs.push(
+        "1. دعم أرقام الأعداد العربية القياسية فقط (1, 2, 3...) في كافة أرجاء الواجهة.",
+      );
+      if (optTheme?.checked)
+        specs.push("2. توفير خيار الوضع الفاتح والداكن (Light/Dark Mode).");
+      specs.push("3. التنسيق باللغة العربية (RTL) واستخدام الخطوط المتناسقة.");
+      if (optView?.checked)
+        specs.push("4. التبديل بين طريقة عرض الشبكة والقائمة (Grid/List).");
+      if (optPrint?.checked)
+        specs.push("5. تحسين تنسيقات الطباعة (@media print).");
 
-معلومات الخطة الزمانية:
+      let functions = [];
+      functions.push("1. جدول توزيع الأسبوع ومنظومة الإنجاز.");
+      functions.push("2. شريط بحث حيّ وتصفية سريعة.");
+      if (optJson?.checked) {
+        functions.push(
+          `3. هيكل تخزين وحفظ الحالة محلياً عبر JSON:\n\`\`\`json\n{\n  "version": "1.0",\n  "startDate": "${startDateVal}",\n  "endDate": "${endDateVal}",\n  "completedAtman": [${selectedIds.slice(0, 3).join(", ")}]\n}\n\`\`\``,
+        );
+      }
+
+      return `أريدك أن تكتب لي كود ملف HTML واحد (Single HTML file) متكامل مع تنسيقات Tailwind CSS وجماليات التصميم السويسري (Swiss Style: خطوط واضحة، مساحات بيضاء دقيقة، إطار أسود، واللون الأحمر المميز #ff2400) يعمل كـ "مخطط تفاعلي لحفظ الأثمان القرآنية برواية نافع المدني".
+
+المواصفات المطلوبة في الواجهة:
+${specs.join("\n")}
+
+معلومات الخطة الزمنية:
 - تاريخ البداية: ${startDateVal}
 - تاريخ النهاية: ${endDateVal}
-- المدة الإجمالية: ${diffDays} يوماً (تُوزّع على ${diffWeeks} أسابيع تقريباً).
+- المدة الإجمالية: ${diffDays} يوماً (~${diffWeeks} أسابيع)
 
-الأثمان المفصلة المطلوب جدولتها وتوزيعها بالتساوي على طول هذه الفترة:
+الأثمان المفصلة المطلوب جدولتها:
 ${selectedDetails}
 
-المطلوب تنفيذه في ملف الـ HTML:
-1. واجهة مستخدم احترافية باللغة العربية (RTL) تبدأ بتأريخ الأسابيع بناءً على تاريخ البداية المحدد.
-2. عرض تفاصيل كل ثمن بوضوح داخل جدول الأسبوع (اسم السورة، رقم الحزب، ورقم الآيات البداية والنهاية).
-3. إمكانية تفاعل المستخدم (مثل تحديد إنجاز الأسبوع وتخزين الحالة محلياً عبر LocalStorage).
-4. تسليم الكود البرمجي كاملاً ونظيفاً ضمن صندوق أكواد واحد فقط جاهز للتشغيل.`;
+الوظائف والتفاعلية المطلوبة:
+${functions.join("\n")}
+
+تسليم الكود البرمجي كاملاً ونظيفاً ضمن صندوق أكواد واحد فقط جاهز للتشغيل.`;
     }
 
     function updatePreview() {
       promptPreview.value = buildPromptText();
     }
 
+    updateCounter();
+    updatePreview();
+
     copyPromptBtn.addEventListener("click", () => {
       const textToCopy = buildPromptText();
-      if (textToCopy.startsWith("الرجاء") || textToCopy.startsWith("تنبيه")) {
+      if (textToCopy.startsWith("خطأ") || textToCopy.startsWith("تنبيه")) {
         alert(textToCopy);
         return;
       }
-
       navigator.clipboard.writeText(textToCopy).then(() => {
         toast.classList.remove("hidden");
-        setTimeout(() => {
-          toast.classList.add("hidden");
-        }, 4000);
+        setTimeout(() => toast.classList.add("hidden"), 3000);
       });
     });
-
-    updatePreview();
   </script>
 </Layout>

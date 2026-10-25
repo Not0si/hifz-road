@@ -1,116 +1,572 @@
 {
-  "1": { "en": "Al-Fatihah", "ar": "الفاتحة" },
-  "2": { "en": "Al-Baqarah", "ar": "البقرة" },
-  "3": { "en": "Ali 'Imran", "ar": "آل عمران" },
-  "4": { "en": "An-Nisa", "ar": "النساء" },
-  "5": { "en": "Al-Ma'idah", "ar": "المائدة" },
-  "6": { "en": "Al-An'am", "ar": "الأنعام" },
-  "7": { "en": "Al-A'raf", "ar": "الأعراف" },
-  "8": { "en": "Al-Anfal", "ar": "الأنفال" },
-  "9": { "en": "At-Tawbah", "ar": "التوبة" },
-  "10": { "en": "Yunus", "ar": "يونس" },
-  "11": { "en": "Hud", "ar": "هود" },
-  "12": { "en": "Yusuf", "ar": "يوسف" },
-  "13": { "en": "Ar-Ra'd", "ar": "الرعد" },
-  "14": { "en": "Ibrahim", "ar": "إبراهيم" },
-  "15": { "en": "Al-Hijr", "ar": "الحجر" },
-  "16": { "en": "An-Nahl", "ar": "النحل" },
-  "17": { "en": "Al-Isra", "ar": "الإسراء" },
-  "18": { "en": "Al-Kahf", "ar": "الكهف" },
-  "19": { "en": "Maryam", "ar": "مريم" },
-  "20": { "en": "Taha", "ar": "طه" },
-  "21": { "en": "Al-Anbya", "ar": "الأنبياء" },
-  "22": { "en": "Al-Hajj", "ar": "الحج" },
-  "23": { "en": "Al-Mu'minun", "ar": "المؤمنون" },
-  "24": { "en": "An-Nur", "ar": "النور" },
-  "25": { "en": "Al-Furqan", "ar": "الفرقان" },
-  "26": { "en": "Ash-Shu'ara", "ar": "الشعراء" },
-  "27": { "en": "An-Naml", "ar": "النمل" },
-  "28": { "en": "Al-Qasas", "ar": "القصص" },
-  "29": { "en": "Al-'Ankabut", "ar": "العنكبوت" },
-  "30": { "en": "Ar-Rum", "ar": "الروم" },
-  "31": { "en": "Luqman", "ar": "لقمان" },
-  "32": { "en": "As-Sajdah", "ar": "السجدة" },
-  "33": { "en": "Al-Ahzab", "ar": "الأحزاب" },
-  "34": { "en": "Saba", "ar": "سبأ" },
-  "35": { "en": "Fatir", "ar": "فاطر" },
-  "36": { "en": "Ya-Sin", "ar": "يس" },
-  "37": { "en": "As-Saffat", "ar": "الصافات" },
-  "38": { "en": "Sad", "ar": "ص" },
-  "39": { "en": "Az-Zumar", "ar": "الزمر" },
-  "40": { "en": "Ghafir", "ar": "غافر" },
-  "41": { "en": "Fussilat", "ar": "فصلت" },
-  "42": { "en": "Ash-Shuraa", "ar": "الشورى" },
-  "43": { "en": "Az-Zukhruf", "ar": "الزخرف" },
-  "44": { "en": "Ad-Dukhan", "ar": "الدخان" },
-  "45": { "en": "Al-Jathiyah", "ar": "الجاثية" },
-  "46": { "en": "Al-Ahqaf", "ar": "الأحقاف" },
-  "47": { "en": "Muhammad", "ar": "محمد" },
-  "48": { "en": "Al-Fath", "ar": "الفتح" },
-  "49": { "en": "Al-Hujurat", "ar": "الحجرات" },
-  "50": { "en": "Qaf", "ar": "ق" },
-  "51": { "en": "Adh-Dhariyat", "ar": "الذاريات" },
-  "52": { "en": "At-Tur", "ar": "الطور" },
-  "53": { "en": "An-Najm", "ar": "النجم" },
-  "54": { "en": "Al-Qamar", "ar": "القمر" },
-  "55": { "en": "Ar-Rahman", "ar": "الرحمن" },
-  "56": { "en": "Al-Waqi'ah", "ar": "الواقعة" },
-  "57": { "en": "Al-Hadid", "ar": "الحديد" },
-  "58": { "en": "Al-Mujadila", "ar": "المجادلة" },
-  "59": { "en": "Al-Hashr", "ar": "الحشر" },
-  "60": { "en": "Al-Mumtahanah", "ar": "الممتحنة" },
-  "61": { "en": "As-Saf", "ar": "الصف" },
-  "62": { "en": "Al-Jumu'ah", "ar": "الجمعة" },
-  "63": { "en": "Al-Munafiqun", "ar": "المنافقون" },
-  "64": { "en": "At-Taghabun", "ar": "التغابن" },
-  "65": { "en": "At-Talaq", "ar": "الطلاق" },
-  "66": { "en": "At-Tahrim", "ar": "التحريم" },
-  "67": { "en": "Al-Mulk", "ar": "الملك" },
-  "68": { "en": "Al-Qalam", "ar": "القلم" },
-  "69": { "en": "Al-Haqqah", "ar": "الحاقة" },
-  "70": { "en": "Al-Ma'arij", "ar": "المعارج" },
-  "71": { "en": "Nuh", "ar": "نوح" },
-  "72": { "en": "Al-Jinn", "ar": "الجن" },
-  "73": { "en": "Al-Muzzammil", "ar": "المزمل" },
-  "74": { "en": "Al-Muddaththir", "ar": "المدثر" },
-  "75": { "en": "Al-Qiyamah", "ar": "القيامة" },
-  "76": { "en": "Al-Insan", "ar": "الإنسان" },
-  "77": { "en": "Al-Mursalat", "ar": "المرسلات" },
-  "78": { "en": "An-Naba", "ar": "النبأ" },
-  "79": { "en": "An-Nazi'at", "ar": "النازعات" },
-  "80": { "en": "Abasa", "ar": "عبس" },
-  "81": { "en": "At-Takwir", "ar": "التكوير" },
-  "82": { "en": "Al-Infitar", "ar": "الانفطار" },
-  "83": { "en": "Al-Mutaffifin", "ar": "المطففين" },
-  "84": { "en": "Al-Inshiqaq", "ar": "الانشقاق" },
-  "85": { "en": "Al-Buruj", "ar": "البروج" },
-  "86": { "en": "At-Tariq", "ar": "الطارق" },
-  "87": { "en": "Al-A'la", "ar": "الأعلى" },
-  "88": { "en": "Al-Ghashiyah", "ar": "الغاشية" },
-  "89": { "en": "Al-Fajr", "ar": "الفجر" },
-  "90": { "en": "Al-Balad", "ar": "البلد" },
-  "91": { "en": "Ash-Shams", "ar": "الشمس" },
-  "92": { "en": "Al-Layl", "ar": "الليل" },
-  "93": { "en": "Ad-Duhaa", "ar": "الضحى" },
-  "94": { "en": "Ash-Sharh", "ar": "الشرح" },
-  "95": { "en": "At-Tin", "ar": "التين" },
-  "96": { "en": "Al-Alaq", "ar": "العلق" },
-  "97": { "en": "Al-Qadr", "ar": "القدر" },
-  "98": { "en": "Al-Bayyinah", "ar": "البينة" },
-  "99": { "en": "Az-Zalzalah", "ar": "الزلزلة" },
-  "100": { "en": "Al-Adiyat", "ar": "العاديات" },
-  "101": { "en": "Al-Qari'ah", "ar": "القارعة" },
-  "102": { "en": "At-Takathur", "ar": "التكاثر" },
-  "103": { "en": "Al-Asr", "ar": "العصر" },
-  "104": { "en": "Al-Humazah", "ar": "الهمزة" },
-  "105": { "en": "Al-Fil", "ar": "الفيل" },
-  "106": { "en": "Quraysh", "ar": "قريش" },
-  "107": { "en": "Al-Ma'un", "ar": "الماعون" },
-  "108": { "en": "Al-Kawthar", "ar": "الكوثر" },
-  "109": { "en": "Al-Kafirun", "ar": "الكافرون" },
-  "110": { "en": "An-Nasr", "ar": "النصر" },
-  "111": { "en": "Al-Masad", "ar": "المسد" },
-  "112": { "en": "Al-Ikhlas", "ar": "الإخلاص" },
-  "113": { "en": "Al-Falaq", "ar": "الفلق" },
-  "114": { "en": "An-Nas", "ar": "الناس" }
+  "1": {
+    "name": { "en": "Al-Fatihah", "ar": "الفاتحة" },
+    "ayahs": 7,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "2": {
+    "name": { "en": "Al-Baqarah", "ar": "البقرة" },
+    "ayahs": 285,
+    "revelation": { "en": "Medinan", "ar": "مدنية" }
+  },
+  "3": {
+    "name": { "en": "Ali 'Imran", "ar": "آل عمران" },
+    "ayahs": 200,
+    "revelation": { "en": "Medinan", "ar": "مدنية" }
+  },
+  "4": {
+    "name": { "en": "An-Nisa", "ar": "النساء" },
+    "ayahs": 175,
+    "revelation": { "en": "Medinan", "ar": "مدنية" }
+  },
+  "5": {
+    "name": { "en": "Al-Ma'idah", "ar": "المائدة" },
+    "ayahs": 122,
+    "revelation": { "en": "Medinan", "ar": "مدنية" }
+  },
+  "6": {
+    "name": { "en": "Al-An'am", "ar": "الأنعام" },
+    "ayahs": 168,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "7": {
+    "name": { "en": "Al-A'raf", "ar": "الأعراف" },
+    "ayahs": 206,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "8": {
+    "name": { "en": "Al-Anfal", "ar": "الأنفال" },
+    "ayahs": 76,
+    "revelation": { "en": "Medinan", "ar": "مدنية" }
+  },
+  "9": {
+    "name": { "en": "At-Tawbah", "ar": "التوبة" },
+    "ayahs": 129,
+    "revelation": { "en": "Medinan", "ar": "مدنية" }
+  },
+  "10": {
+    "name": { "en": "Yunus", "ar": "يونس" },
+    "ayahs": 109,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "11": {
+    "name": { "en": "Hud", "ar": "هود" },
+    "ayahs": 123,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "12": {
+    "name": { "en": "Yusuf", "ar": "يوسف" },
+    "ayahs": 111,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "13": {
+    "name": { "en": "Ar-Ra'd", "ar": "الرعد" },
+    "ayahs": 43,
+    "revelation": { "en": "Medinan", "ar": "مدنية" }
+  },
+  "14": {
+    "name": { "en": "Ibrahim", "ar": "إبراهيم" },
+    "ayahs": 52,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "15": {
+    "name": { "en": "Al-Hijr", "ar": "الحجر" },
+    "ayahs": 99,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "16": {
+    "name": { "en": "An-Nahl", "ar": "النحل" },
+    "ayahs": 128,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "17": {
+    "name": { "en": "Al-Isra", "ar": "الإسراء" },
+    "ayahs": 111,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "18": {
+    "name": { "en": "Al-Kahf", "ar": "الكهف" },
+    "ayahs": 110,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "19": {
+    "name": { "en": "Maryam", "ar": "مريم" },
+    "ayahs": 98,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "20": {
+    "name": { "en": "Taha", "ar": "طه" },
+    "ayahs": 135,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "21": {
+    "name": { "en": "Al-Anbya", "ar": "الأنبياء" },
+    "ayahs": 112,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "22": {
+    "name": { "en": "Al-Hajj", "ar": "الحج" },
+    "ayahs": 78,
+    "revelation": { "en": "Medinan", "ar": "مدنية" }
+  },
+  "23": {
+    "name": { "en": "Al-Mu'minun", "ar": "المؤمنون" },
+    "ayahs": 118,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "24": {
+    "name": { "en": "An-Nur", "ar": "النور" },
+    "ayahs": 64,
+    "revelation": { "en": "Medinan", "ar": "مدنية" }
+  },
+  "25": {
+    "name": { "en": "Al-Furqan", "ar": "الفرقان" },
+    "ayahs": 77,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "26": {
+    "name": { "en": "Ash-Shu'ara", "ar": "الشعراء" },
+    "ayahs": 227,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "27": {
+    "name": { "en": "An-Naml", "ar": "النمل" },
+    "ayahs": 93,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "28": {
+    "name": { "en": "Al-Qasas", "ar": "القصص" },
+    "ayahs": 88,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "29": {
+    "name": { "en": "Al-'Ankabut", "ar": "العنكبوت" },
+    "ayahs": 69,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "30": {
+    "name": { "en": "Ar-Rum", "ar": "الروم" },
+    "ayahs": 60,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "31": {
+    "name": { "en": "Luqman", "ar": "لقمان" },
+    "ayahs": 34,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "32": {
+    "name": { "en": "As-Sajdah", "ar": "السجدة" },
+    "ayahs": 30,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "33": {
+    "name": { "en": "Al-Ahzab", "ar": "الأحزاب" },
+    "ayahs": 73,
+    "revelation": { "en": "Medinan", "ar": "مدنية" }
+  },
+  "34": {
+    "name": { "en": "Saba", "ar": "سبأ" },
+    "ayahs": 54,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "35": {
+    "name": { "en": "Fatir", "ar": "فاطر" },
+    "ayahs": 45,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "36": {
+    "name": { "en": "Ya-Sin", "ar": "يس" },
+    "ayahs": 83,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "37": {
+    "name": { "en": "As-Saffat", "ar": "الصافات" },
+    "ayahs": 182,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "38": {
+    "name": { "en": "Sad", "ar": "ص" },
+    "ayahs": 88,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "39": {
+    "name": { "en": "Az-Zumar", "ar": "الزمر" },
+    "ayahs": 75,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "40": {
+    "name": { "en": "Ghafir", "ar": "غافر" },
+    "ayahs": 85,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "41": {
+    "name": { "en": "Fussilat", "ar": "فصلت" },
+    "ayahs": 54,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "42": {
+    "name": { "en": "Ash-Shuraa", "ar": "الشورى" },
+    "ayahs": 53,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "43": {
+    "name": { "en": "Az-Zukhruf", "ar": "الزخرف" },
+    "ayahs": 89,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "44": {
+    "name": { "en": "Ad-Dukhan", "ar": "الدخان" },
+    "ayahs": 59,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "45": {
+    "name": { "en": "Al-Jathiyah", "ar": "الجاثية" },
+    "ayahs": 37,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "46": {
+    "name": { "en": "Al-Ahqaf", "ar": "الأحقاف" },
+    "ayahs": 35,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "47": {
+    "name": { "en": "Muhammad", "ar": "محمد" },
+    "ayahs": 38,
+    "revelation": { "en": "Medinan", "ar": "مدنية" }
+  },
+  "48": {
+    "name": { "en": "Al-Fath", "ar": "الفتح" },
+    "ayahs": 29,
+    "revelation": { "en": "Medinan", "ar": "مدنية" }
+  },
+  "49": {
+    "name": { "en": "Al-Hujurat", "ar": "الحجرات" },
+    "ayahs": 18,
+    "revelation": { "en": "Medinan", "ar": "مدنية" }
+  },
+  "50": {
+    "name": { "en": "Qaf", "ar": "ق" },
+    "ayahs": 45,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "51": {
+    "name": { "en": "Adh-Dhariyat", "ar": "الذاريات" },
+    "ayahs": 60,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "52": {
+    "name": { "en": "At-Tur", "ar": "الطور" },
+    "ayahs": 49,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "53": {
+    "name": { "en": "An-Najm", "ar": "النجم" },
+    "ayahs": 62,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "54": {
+    "name": { "en": "Al-Qamar", "ar": "القمر" },
+    "ayahs": 55,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "55": {
+    "name": { "en": "Ar-Rahman", "ar": "الرحمن" },
+    "ayahs": 78,
+    "revelation": { "en": "Medinan", "ar": "مدنية" }
+  },
+  "56": {
+    "name": { "en": "Al-Waqi'ah", "ar": "الواقعة" },
+    "ayahs": 96,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "57": {
+    "name": { "en": "Al-Hadid", "ar": "الحديد" },
+    "ayahs": 29,
+    "revelation": { "en": "Medinan", "ar": "مدنية" }
+  },
+  "58": {
+    "name": { "en": "Al-Mujadila", "ar": "المجادلة" },
+    "ayahs": 22,
+    "revelation": { "en": "Medinan", "ar": "مدنية" }
+  },
+  "59": {
+    "name": { "en": "Al-Hashr", "ar": "الحشر" },
+    "ayahs": 24,
+    "revelation": { "en": "Medinan", "ar": "مدنية" }
+  },
+  "60": {
+    "name": { "en": "Al-Mumtahanah", "ar": "الممتحنة" },
+    "ayahs": 13,
+    "revelation": { "en": "Medinan", "ar": "مدنية" }
+  },
+  "61": {
+    "name": { "en": "As-Saf", "ar": "الصف" },
+    "ayahs": 14,
+    "revelation": { "en": "Medinan", "ar": "مدنية" }
+  },
+  "62": {
+    "name": { "en": "Al-Jumu'ah", "ar": "الجمعة" },
+    "ayahs": 11,
+    "revelation": { "en": "Medinan", "ar": "مدنية" }
+  },
+  "63": {
+    "name": { "en": "Al-Munafiqun", "ar": "المنافقون" },
+    "ayahs": 11,
+    "revelation": { "en": "Medinan", "ar": "مدنية" }
+  },
+  "64": {
+    "name": { "en": "At-Taghabun", "ar": "التغابن" },
+    "ayahs": 18,
+    "revelation": { "en": "Medinan", "ar": "مدنية" }
+  },
+  "65": {
+    "name": { "en": "At-Talaq", "ar": "الطلاق" },
+    "ayahs": 12,
+    "revelation": { "en": "Medinan", "ar": "مدنية" }
+  },
+  "66": {
+    "name": { "en": "At-Tahrim", "ar": "التحريم" },
+    "ayahs": 12,
+    "revelation": { "en": "Medinan", "ar": "مدنية" }
+  },
+  "67": {
+    "name": { "en": "Al-Mulk", "ar": "الملك" },
+    "ayahs": 30,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "68": {
+    "name": { "en": "Al-Qalam", "ar": "القلم" },
+    "ayahs": 52,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "69": {
+    "name": { "en": "Al-Haqqah", "ar": "الحاقة" },
+    "ayahs": 52,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "70": {
+    "name": { "en": "Al-Ma'arij", "ar": "المعارج" },
+    "ayahs": 44,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "71": {
+    "name": { "en": "Nuh", "ar": "نوح" },
+    "ayahs": 28,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "72": {
+    "name": { "en": "Al-Jinn", "ar": "الجن" },
+    "ayahs": 28,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "73": {
+    "name": { "en": "Al-Muzzammil", "ar": "المزمل" },
+    "ayahs": 20,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "74": {
+    "name": { "en": "Al-Muddaththir", "ar": "المدثر" },
+    "ayahs": 56,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "75": {
+    "name": { "en": "Al-Qiyamah", "ar": "القيامة" },
+    "ayahs": 40,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "76": {
+    "name": { "en": "Al-Insan", "ar": "الإنسان" },
+    "ayahs": 31,
+    "revelation": { "en": "Medinan", "ar": "مدنية" }
+  },
+  "77": {
+    "name": { "en": "Al-Mursalat", "ar": "المرسلات" },
+    "ayahs": 50,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "78": {
+    "name": { "en": "An-Naba", "ar": "النبأ" },
+    "ayahs": 40,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "79": {
+    "name": { "en": "An-Nazi'at", "ar": "النازعات" },
+    "ayahs": 46,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "80": {
+    "name": { "en": "Abasa", "ar": "عبس" },
+    "ayahs": 42,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "81": {
+    "name": { "en": "At-Takwir", "ar": "التكوير" },
+    "ayahs": 29,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "82": {
+    "name": { "en": "Al-Infitar", "ar": "الانفطار" },
+    "ayahs": 19,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "83": {
+    "name": { "en": "Al-Mutaffifin", "ar": "المطففين" },
+    "ayahs": 36,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "84": {
+    "name": { "en": "Al-Inshiqaq", "ar": "الانشقاق" },
+    "ayahs": 25,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "85": {
+    "name": { "en": "Al-Buruj", "ar": "البروج" },
+    "ayahs": 22,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "86": {
+    "name": { "en": "At-Tariq", "ar": "الطارق" },
+    "ayahs": 17,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "87": {
+    "name": { "en": "Al-A'la", "ar": "الأعلى" },
+    "ayahs": 19,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "88": {
+    "name": { "en": "Al-Ghashiyah", "ar": "الغاشية" },
+    "ayahs": 26,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "89": {
+    "name": { "en": "Al-Fajr", "ar": "الفجر" },
+    "ayahs": 30,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "90": {
+    "name": { "en": "Al-Balad", "ar": "البلد" },
+    "ayahs": 20,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "91": {
+    "name": { "en": "Ash-Shams", "ar": "الشمس" },
+    "ayahs": 15,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "92": {
+    "name": { "en": "Al-Layl", "ar": "الليل" },
+    "ayahs": 21,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "93": {
+    "name": { "en": "Ad-Duhaa", "ar": "الضحى" },
+    "ayahs": 11,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "94": {
+    "name": { "en": "Ash-Sharh", "ar": "الشرح" },
+    "ayahs": 8,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "95": {
+    "name": { "en": "At-Tin", "ar": "التين" },
+    "ayahs": 8,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "96": {
+    "name": { "en": "Al-Alaq", "ar": "العلق" },
+    "ayahs": 19,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "97": {
+    "name": { "en": "Al-Qadr", "ar": "القدر" },
+    "ayahs": 5,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "98": {
+    "name": { "en": "Al-Bayyinah", "ar": "البينة" },
+    "ayahs": 8,
+    "revelation": { "en": "Medinan", "ar": "مدنية" }
+  },
+  "99": {
+    "name": { "en": "Az-Zalzalah", "ar": "الزلزلة" },
+    "ayahs": 8,
+    "revelation": { "en": "Medinan", "ar": "مدنية" }
+  },
+  "100": {
+    "name": { "en": "Al-Adiyat", "ar": "العاديات" },
+    "ayahs": 11,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "101": {
+    "name": { "en": "Al-Qari'ah", "ar": "القارعة" },
+    "ayahs": 11,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "102": {
+    "name": { "en": "At-Takathur", "ar": "التكاثر" },
+    "ayahs": 8,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "103": {
+    "name": { "en": "Al-Asr", "ar": "العصر" },
+    "ayahs": 3,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "104": {
+    "name": { "en": "Al-Humazah", "ar": "الهمزة" },
+    "ayahs": 9,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "105": {
+    "name": { "en": "Al-Fil", "ar": "الفيل" },
+    "ayahs": 5,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "106": {
+    "name": { "en": "Quraysh", "ar": "قريش" },
+    "ayahs": 4,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "107": {
+    "name": { "en": "Al-Ma'un", "ar": "الماعون" },
+    "ayahs": 7,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "108": {
+    "name": { "en": "Al-Kawthar", "ar": "الكوثر" },
+    "ayahs": 3,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "109": {
+    "name": { "en": "Al-Kafirun", "ar": "الكافرون" },
+    "ayahs": 6,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "110": {
+    "name": { "en": "An-Nasr", "ar": "النصر" },
+    "ayahs": 3,
+    "revelation": { "en": "Medinan", "ar": "مدنية" }
+  },
+  "111": {
+    "name": { "en": "Al-Masad", "ar": "المسد" },
+    "ayahs": 5,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "112": {
+    "name": { "en": "Al-Ikhlas", "ar": "الإخلاص" },
+    "ayahs": 4,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "113": {
+    "name": { "en": "Al-Falaq", "ar": "الفلق" },
+    "ayahs": 5,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  },
+  "114": {
+    "name": { "en": "An-Nas", "ar": "الناس" },
+    "ayahs": 6,
+    "revelation": { "en": "Meccan", "ar": "مكية" }
+  }
 }

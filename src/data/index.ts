@@ -13,12 +13,18 @@ type Irange = {
 type Iathman = Record<`${number}`, Irange>;
 type Iahzab = Record<`${number}`, Irange>;
 type Ipages = Record<`${number}`, Irange>;
-type Isuwar = Record<`${number}`, { en: string; ar: string }>;
+type Isuwar = Record<
+  `${number}`,
+  {
+    name: { en: string; ar: string };
+    ayahs: number;
+    revelation: { en: string; ar: string };
+  }
+>;
 
 export const suwar = suwarData as Isuwar;
 export const ahzab = ahzabData as Iahzab;
 export const atman = atmanData as Iathman;
 export const pages = pagesData as Ipages;
 
-// export { suwar:suwarRaw as Isuwar, ahzab, atman };
 export type { Iathman, Iahzab, Isuwar };
